@@ -29,7 +29,7 @@ export default defineType({
       name: "icon",
       title: "Ícono",
       type: "string",
-      description: 'Lucide icon name (e.g., "mic-2", "users", "compass")',
+      description: 'Lucide icon name (e.g., "graduation-cap", "heart", "users")',
     }),
     defineField({
       name: "audience",

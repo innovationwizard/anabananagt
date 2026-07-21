@@ -1,31 +1,28 @@
 import type { Metadata } from "next";
+import { Playfair_Display, Montserrat } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 // ---------------------------------------------------------------------------
-// Fonts — Google Fonts loaded via next/font
-// NOTE: In sandboxed/CI environments without Google Fonts access, the build
-// uses CSS fallbacks defined in globals.css. On Vercel, uncomment the imports
-// below and add the variables to the <html> className.
+// Fonts (brand manual Ch.05 · Tipografía)
+// Playfair Display = titulares/citas. Montserrat = free substitute for Gotham
+// ("Ghotam"). Self-hosted at build time via next/font — no runtime requests to
+// Google. Exposed as CSS variables consumed by @theme in globals.css.
 // ---------------------------------------------------------------------------
-// import { Playfair_Display, Source_Sans_3 } from "next/font/google";
-//
-// const playfair = Playfair_Display({
-//   subsets: ["latin"],
-//   variable: "--font-display",
-//   display: "swap",
-//   weight: ["400", "600", "700"],
-// });
-//
-// const sourceSans = Source_Sans_3({
-//   subsets: ["latin"],
-//   variable: "--font-body",
-//   display: "swap",
-//   weight: ["400", "600", "700"],
-// });
-//
-// Then add to <html>: className={`${playfair.variable} ${sourceSans.variable}`}
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
 
 // ---------------------------------------------------------------------------
 // Metadata
@@ -35,19 +32,20 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://anabanana.gt";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "anabanana — Keynotes, Facilitación y Entrenamiento Ejecutivo",
-    template: "%s | anabanana",
+    default:
+      "ana banana Experiences — Transformar desde lo humano",
+    template: "%s | ana banana Experiences",
   },
   description:
-    "Ana Gabriela — Conferencista corporativa, facilitadora ejecutiva y estratega de marca. Keynotes, talleres y consultoría para las empresas más exigentes de la región.",
+    "Diseñamos experiencias corporativas personalizadas que desarrollan personas, impulsan el bienestar y fortalecen la cultura de cada organización.",
   openGraph: {
     type: "website",
     locale: "es_GT",
     url: siteUrl,
-    siteName: "anabanana",
-    title: "anabanana — Keynotes, Facilitación y Entrenamiento Ejecutivo",
+    siteName: "ana banana Experiences",
+    title: "ana banana Experiences — Transformar desde lo humano",
     description:
-      "Keynotes, talleres corporativos y consultoría estratégica para empresas que exigen resultados.",
+      "Experiencias corporativas que desarrollan personas, impulsan el bienestar y fortalecen la cultura. Las empresas crecen cuando las personas crecen.",
   },
   robots: {
     index: true,
@@ -64,16 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es-GT">
-      <head>
-        {/* Google Fonts — preconnect + stylesheet for production */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="es-GT" className={`${playfair.variable} ${montserrat.variable}`}>
       <body className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-1">{children}</main>

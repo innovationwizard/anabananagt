@@ -23,88 +23,88 @@ const CASES_DATA: Record<
   }
 > = {
   "caso-1": {
-    title: "Evento Integral de Liderazgo para Banco Tier 1 Regional",
-    clientAlias: "Banco Tier 1 Regional",
+    title: "Kick Off que volvió a unir a un banco regional",
+    clientAlias: "Banco regional",
     industry: "Banca y Finanzas",
-    serviceType: "Evento Integral",
+    serviceType: "Experiencias de Integración",
     attendance: 500,
     challenge:
-      "[Placeholder] Describe el desafío específico que enfrentaba el cliente. Ejemplo: El equipo de liderazgo de 500 ejecutivos necesitaba alinearse en torno a la nueva estrategia digital del banco tras una fusión regional.",
+      "[Placeholder] Describe el desafío del cliente. Ejemplo: tras una fusión regional, 500 personas de distintas culturas necesitaban reconocerse como un solo equipo y recuperar el sentido de pertenencia.",
     solution:
-      "[Placeholder] Describe la solución entregada. Ejemplo: Diseñamos un programa de dos días que combinó keynotes sobre transformación digital, talleres de marca personal para líderes, y sesiones de coaching ejecutivo.",
+      "[Placeholder] Describe la experiencia diseñada. Ejemplo: un kick off de integración de dos días con dinámicas colaborativas, experiencias temáticas y momentos de conexión genuina.",
     results: [
-      "500+ ejecutivos participaron en el programa de 2 días",
-      "94% de satisfacción en encuesta post-evento",
-      "Incremento del 35% en engagement de marca empleadora (medido a 90 días)",
+      "500+ personas vivieron la experiencia de integración",
+      "94% de satisfacción en la encuesta posterior",
+      "Mejora percibida en pertenencia y confianza entre equipos",
     ],
     testimonial: {
       quote:
-        "[Placeholder] Inserte cita real del cliente. Ejemplo: 'El programa de anabanana transformó la manera en que nuestros líderes se comunican. El impacto fue inmediato y medible.'",
-      author: "Nombre del Ejecutivo",
-      role: "VP de Talento Humano",
+        "[Placeholder] Inserte cita real del cliente. Ejemplo: 'La experiencia de ana banana Experiences volvió a unir a nuestra gente. El cambio en el clima fue inmediato.'",
+      author: "Nombre del líder",
+      role: "Gerencia de Talento",
     },
   },
   "caso-2": {
-    title: "Taller de Storytelling para Equipo Comercial",
-    clientAlias: "Corporación Industrial",
+    title: "Programa de bienestar para una compañía industrial",
+    clientAlias: "Compañía industrial",
     industry: "Manufactura",
-    serviceType: "Taller Corporativo",
+    serviceType: "Bienestar Corporativo",
     attendance: 120,
     challenge:
-      "[Placeholder] Describe el desafío del cliente en ventas, comunicación o liderazgo.",
+      "[Placeholder] Describe el desafío de bienestar del equipo (energía, clima, equilibrio).",
     solution:
-      "[Placeholder] Describe el programa diseñado y ejecutado por anabanana.",
+      "[Placeholder] Describe la experiencia de bienestar diseñada por ana banana Experiences.",
     results: [
-      "120 vendedores entrenados en storytelling de ventas",
-      "92% de satisfacción post-taller",
-      "Pipeline de ventas incrementó 22% en el trimestre siguiente",
+      "120 personas participaron en las activaciones de bienestar",
+      "92% de satisfacción posterior",
+      "Personas con más energía y sensación de ser cuidadas",
     ],
     testimonial: {
       quote: "[Placeholder] Cita del sponsor del proyecto.",
-      author: "Nombre del Ejecutivo",
-      role: "Director Comercial",
+      author: "Nombre del líder",
+      role: "Dirección de RRHH",
     },
   },
   "caso-3": {
-    title: "Keynote de Identidad Digital para Convención Nacional",
-    clientAlias: "Empresa de Telecomunicaciones",
+    title: "Experiencia de desarrollo para una convención nacional",
+    clientAlias: "Empresa de telecomunicaciones",
     industry: "Telecomunicaciones",
-    serviceType: "Keynote",
+    serviceType: "Desarrollo Profesional",
     attendance: 300,
     challenge:
-      "[Placeholder] Describe el contexto de la convención y el objetivo del keynote.",
+      "[Placeholder] Describe el contexto de la convención y el objetivo de desarrollo.",
     solution:
-      "[Placeholder] Describe el keynote entregado, temas cubiertos, y formato.",
+      "[Placeholder] Describe la experiencia de desarrollo entregada, temas y formato.",
     results: [
-      "300+ ejecutivos presentes en la convención",
-      "Keynote evaluada como #1 del evento en encuesta de salida",
-      "5 solicitudes de taller de seguimiento generadas en las 2 semanas posteriores",
+      "300+ personas participaron en la experiencia",
+      "Evaluada como #1 del evento en la encuesta de salida",
+      "5 solicitudes de experiencias de seguimiento en las 2 semanas posteriores",
     ],
     testimonial: {
       quote: "[Placeholder] Cita del organizador del evento.",
-      author: "Nombre del Ejecutivo",
-      role: "Directora de Eventos Corporativos",
+      author: "Nombre del líder",
+      role: "Dirección de Eventos Corporativos",
     },
   },
   "caso-4": {
-    title: "Consultoría de Marca Personal para C-Suite",
-    clientAlias: "Firma de Servicios Profesionales",
+    title: "Desarrollo de marca profesional para líderes",
+    clientAlias: "Firma de servicios profesionales",
     industry: "Servicios Profesionales",
-    serviceType: "Consultoría",
+    serviceType: "Desarrollo Profesional",
     attendance: 8,
     challenge:
-      "[Placeholder] Describe el desafío de posicionamiento del equipo directivo.",
+      "[Placeholder] Describe el desafío de desarrollo y posicionamiento del equipo directivo.",
     solution:
-      "[Placeholder] Describe el programa de consultoría: diagnóstico, plan, ejecución.",
+      "[Placeholder] Describe la experiencia de desarrollo: diagnóstico, diseño y acompañamiento.",
     results: [
-      "8 socios del C-suite completaron el programa de 12 semanas",
-      "LinkedIn engagement de los participantes creció 4x",
-      "3 invitaciones a paneles de industria generadas para los socios",
+      "8 líderes completaron el programa de 12 semanas",
+      "Presencia profesional de los participantes fortalecida",
+      "3 invitaciones a paneles de industria generadas para el equipo",
     ],
     testimonial: {
-      quote: "[Placeholder] Cita del managing partner.",
-      author: "Nombre del Socio",
-      role: "Managing Partner",
+      quote: "[Placeholder] Cita del sponsor del programa.",
+      author: "Nombre del líder",
+      role: "Dirección General",
     },
   },
 };
@@ -155,21 +155,21 @@ export default async function CaseStudyPage({ params }: PageProps) {
         <div className="relative z-10 container-narrow py-16 md:py-24">
           <div className="flex flex-wrap items-center gap-3 mb-4">
             <span className="px-3 py-1 text-[10px] font-semibold tracking-[0.15em] uppercase
-                             bg-accent/20 text-accent">
+                             bg-highlight/20 text-highlight">
               {c.serviceType}
             </span>
             <span className="text-xs text-text-inverse/40">{c.industry}</span>
           </div>
-          <h1 className="font-display text-3xl md:text-5xl font-bold text-text-inverse leading-tight max-w-3xl">
+          <h1 className="font-display text-3xl md:text-5xl font-semibold text-text-inverse leading-tight max-w-3xl">
             {c.title}
           </h1>
           <div className="flex items-center gap-6 mt-6">
             <div>
-              <span className="block text-accent font-display text-3xl font-bold">
+              <span className="block text-highlight font-display text-3xl font-semibold">
                 {c.attendance}+
               </span>
               <span className="text-xs text-text-inverse/40 uppercase tracking-wider">
-                Participantes
+                Personas
               </span>
             </div>
           </div>
@@ -199,7 +199,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
       {/* --- Results --- */}
       <section className="section-padding bg-primary grain-overlay">
         <div className="container-narrow max-w-3xl">
-          <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-8">
+          <span className="inline-block text-highlight text-xs font-semibold tracking-[0.2em] uppercase mb-8">
             Resultados
           </span>
           <div className="space-y-6">
@@ -209,7 +209,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
                 className="flex gap-4 items-start text-text-inverse/80"
               >
                 <span className="shrink-0 w-8 h-8 flex items-center justify-center
-                                 bg-accent/10 text-accent text-sm font-bold">
+                                 bg-highlight/10 text-highlight text-sm font-bold">
                   {i + 1}
                 </span>
                 <span className="text-lg leading-relaxed">{r}</span>
@@ -240,20 +240,20 @@ export default async function CaseStudyPage({ params }: PageProps) {
       <section className="bg-primary grain-overlay py-16 md:py-20">
         <div className="container-narrow flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-text-inverse">
-              ¿Busca resultados similares?
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-inverse">
+              ¿Busca una experiencia como esta?
             </h2>
             <p className="mt-2 text-text-inverse/50">
-              Cada proyecto inicia con una conversación.
+              Cada experiencia inicia con una conversación.
             </p>
           </div>
           <Link
             href="/contacto"
-            className="inline-flex items-center px-10 py-4 bg-accent text-primary
+            className="inline-flex items-center px-10 py-4 bg-highlight text-primary
                        text-sm font-semibold tracking-[0.1em] uppercase
-                       hover:bg-accent-hover transition-colors duration-300 shrink-0"
+                       hover:brightness-95 transition-all duration-300 shrink-0"
           >
-            Agendar Consulta
+            Conversemos
           </Link>
         </div>
       </section>

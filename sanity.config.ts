@@ -15,7 +15,7 @@ import { schemaTypes } from "./sanity/schemas";
 
 export default defineConfig({
   name: "anabanana",
-  title: "anabanana — Content Studio",
+  title: "ana banana Experiences — Content Studio",
 
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "your-project-id",
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",

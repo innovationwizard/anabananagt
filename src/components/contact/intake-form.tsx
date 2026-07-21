@@ -182,10 +182,10 @@ export function IntakeForm() {
             <StepWrapper key="step2">
               <StepTitle
                 number="02"
-                title="Detalles del evento"
+                title="Detalles de la experiencia"
                 subtitle="Ayúdenos a entender el alcance de lo que necesita."
               />
-              <Field label="Servicio de interés" error={errors.serviceType?.message}>
+              <Field label="Experiencia de interés" error={errors.serviceType?.message}>
                 <select {...register("serviceType")} className="form-input">
                   <option value="">Seleccione...</option>
                   {Object.entries(SERVICE_LABELS).map(([val, label]) => (
@@ -337,8 +337,8 @@ export function IntakeForm() {
                     className="mt-1 w-4 h-4 accent-accent"
                   />
                   <span className="text-sm text-text-muted">
-                    Acepto la política de privacidad y autorizo a anabanana a
-                    contactarme respecto a esta solicitud.
+                    Acepto la política de privacidad y autorizo a ana banana
+                    Experiences a contactarme respecto a esta solicitud.
                   </span>
                 </label>
               </Field>
@@ -366,9 +366,9 @@ export function IntakeForm() {
             <button
               type="button"
               onClick={nextStep}
-              className="flex items-center gap-2 px-8 py-3 bg-accent text-primary
+              className="flex items-center gap-2 px-8 py-3 bg-highlight text-primary
                          text-sm font-semibold tracking-[0.06em] uppercase
-                         hover:bg-accent-hover transition-colors"
+                         hover:brightness-95 transition-all"
             >
               Siguiente
               <ArrowRight className="w-4 h-4" />
@@ -377,9 +377,9 @@ export function IntakeForm() {
             <button
               type="submit"
               disabled={submitting}
-              className="flex items-center gap-2 px-8 py-3 bg-accent text-primary
+              className="flex items-center gap-2 px-8 py-3 bg-highlight text-primary
                          text-sm font-semibold tracking-[0.06em] uppercase
-                         hover:bg-accent-hover transition-colors
+                         hover:brightness-95 transition-all
                          disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? (

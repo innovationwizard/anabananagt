@@ -21,16 +21,17 @@ export function Footer() {
       <div className="border-b border-border-dark">
         <div className="container-narrow flex flex-col md:flex-row items-center
                         justify-between gap-6 py-12 md:py-16">
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-center md:text-left">
-            ¿Listo para transformar a su equipo?
+          <h3 className="font-display text-2xl md:text-3xl font-semibold text-center md:text-left">
+            Transformemos su organización{" "}
+            <span className="italic text-highlight">desde lo humano.</span>
           </h3>
           <Link
             href="/contacto"
-            className="inline-flex items-center px-8 py-3 bg-accent text-primary
+            className="inline-flex items-center px-8 py-3 bg-highlight text-primary
                        text-sm font-semibold tracking-[0.08em] uppercase
-                       hover:bg-accent-hover transition-colors duration-300 shrink-0"
+                       hover:brightness-95 transition-all duration-300 shrink-0"
           >
-            Agendar Consulta Privada
+            Conversemos
           </Link>
         </div>
       </div>
@@ -42,17 +43,22 @@ export function Footer() {
           <div className="max-w-xs">
             <div className="flex items-center gap-3">
               <Image
-                src="/brand/anabananagt_logo_mark.png"
+                src="/brand/ab-isotipo-on-softblue.png"
                 alt=""
-                width={32}
-                height={32}
-                className="h-8 w-8 object-contain"
+                width={36}
+                height={36}
+                className="h-9 w-9 rounded-lg object-cover"
               />
-              <span className="font-display text-lg font-bold">anabanana</span>
+              <span className="font-display text-lg font-semibold">
+                ana banana{" "}
+                <span className="text-text-inverse/50 text-sm tracking-[0.2em] uppercase">
+                  Experiences
+                </span>
+              </span>
             </div>
             <p className="mt-3 text-sm text-text-inverse/50 leading-relaxed">
-              Keynotes, facilitación y entrenamiento ejecutivo para las empresas
-              más exigentes de la región.
+              Experiencias corporativas que desarrollan personas, impulsan el
+              bienestar y fortalecen la cultura de cada organización.
             </p>
           </div>
 
@@ -62,7 +68,7 @@ export function Footer() {
               <Link
                 key={href}
                 href={href}
-                className="text-sm text-text-inverse/50 hover:text-accent
+                className="text-sm text-text-inverse/50 hover:text-highlight
                            transition-colors duration-300"
               >
                 {label}
@@ -79,7 +85,7 @@ export function Footer() {
               href="https://www.linkedin.com/company/grupoanabanana/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-text-inverse/50 hover:text-accent transition-colors"
+              className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
             >
               LinkedIn
             </a>
@@ -87,7 +93,7 @@ export function Footer() {
               href="https://www.instagram.com/anabanana.gt/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-text-inverse/50 hover:text-accent transition-colors"
+              className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
             >
               Instagram
             </a>
@@ -95,7 +101,7 @@ export function Footer() {
               href="https://wa.me/50250320841"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-text-inverse/50 hover:text-accent transition-colors"
+              className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
             >
               WhatsApp
             </a>
@@ -106,7 +112,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-border-dark
                         flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="text-xs text-text-inverse/30">
-            © {year} Grupo anabanana, S.A. Todos los derechos reservados.
+            © {year} ana banana Experiences · Grupo anabanana, S.A. Todos los derechos reservados.
           </span>
           <span className="text-xs text-text-inverse/30">
             Guatemala City, Guatemala

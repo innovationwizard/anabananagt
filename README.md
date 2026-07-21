@@ -1,10 +1,13 @@
 # anabanana.gt
 
-Corporate website for **Ana Gabriela — Grupo anabanana, S.A.**: a high-authority,
-conversion-optimized B2B presence for keynotes, corporate workshops, and executive
-consulting. Replaces the legacy WooCommerce storefront.
+Corporate website for **ana banana Experiences** (Grupo anabanana, S.A.): a B2B
+presence for corporate experiences that transform organizations *desde lo humano*
+— across three pillars: **Desarrollo Profesional**, **Bienestar Corporativo** and
+**Experiencias de Integración**.
 
-Full product spec: [`docs/ANABANANA_SDD_v2.md`](docs/ANABANANA_SDD_v2.md).
+- **Brand system:** [`docs/manual-ana-banana.pdf`](docs/manual-ana-banana.pdf) (v1.0 — 2026) — the authoritative source for identity (palette, type, logo, voice).
+- **Refactor tracker:** [`docs/BRAND_REFACTOR_PLAN.md`](docs/BRAND_REFACTOR_PLAN.md) — living plan/progress for the rebrand.
+- **Original build spec:** [`docs/ANABANANA_SDD_v2.md`](docs/ANABANANA_SDD_v2.md) — architecture/data model still valid; **its §7 design system (gold "Quiet Authority") is superseded by the brand manual.**
 
 ## Stack
 
@@ -60,14 +63,17 @@ public/brand/        Logo assets
 docs/                Software Design Document (SDD v2)
 ```
 
-Brand emblem is wired into the navbar/footer, the app icons (`src/app/icon.png`,
-`apple-icon.png`), and the generated social card (`src/app/opengraph-image.tsx`).
+The brand logo (`public/brand/ab-*.png` — cream-on-navy lockup, isotipo, etc.) is
+wired into the navbar/footer, the app icons (`src/app/icon.png`, `apple-icon.png`),
+and the generated social card (`src/app/opengraph-image.tsx`). The `ab-lockup-*`
+tiles have baked-in backgrounds — swap for transparent SVG exports when available.
 
 ## Fonts
 
-Playfair Display + Source Sans 3 load via `<link>` tags in
-[`src/app/layout.tsx`](src/app/layout.tsx). The commented-out `next/font/google`
-imports there are an optional self-hosting optimization for production.
+Playfair Display (titulares/citas) + Montserrat (body — the free substitute for
+the manual's Gotham/"Ghotam") are self-hosted at build time via `next/font/google`
+in [`src/app/layout.tsx`](src/app/layout.tsx) and exposed as `--font-playfair` /
+`--font-montserrat` to `@theme` in `globals.css`. No runtime requests to Google.
 
 ## Deploy (Vercel)
 

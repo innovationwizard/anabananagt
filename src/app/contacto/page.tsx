@@ -17,15 +17,15 @@ export default function ContactoPage() {
       {/* --- Page Header --- */}
       <section className="bg-primary grain-overlay pt-32 pb-16 md:pb-20">
         <div className="container-narrow text-center">
-          <span className="inline-block text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-4">
-            Contacto
+          <span className="inline-block text-highlight text-xs font-semibold tracking-[0.25em] uppercase mb-4">
+            Conversemos
           </span>
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-text-inverse leading-tight">
-            Agendar una consulta privada
+          <h1 className="font-display text-4xl md:text-5xl font-semibold text-text-inverse leading-tight">
+            Diseñemos una experiencia para su equipo
           </h1>
           <p className="mt-6 text-lg text-text-inverse/60 max-w-2xl mx-auto">
-            Complete este formulario para iniciar una conversación. Nuestro equipo
-            revisará su solicitud y le contactará en las próximas 24 horas hábiles.
+            Cuéntenos sobre su organización y sus objetivos. Escuchamos, y le
+            proponemos una experiencia a la medida en las próximas 24 horas hábiles.
           </p>
         </div>
       </section>

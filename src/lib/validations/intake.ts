@@ -30,11 +30,11 @@ export const IntakeSchema = z.object({
     ),
   phone: z.string().optional(),
 
-  // Step 2 — Event Details
+  // Step 2 — Experience Details
   serviceType: z.enum([
-    "keynote",
-    "taller-corporativo",
-    "consultoria-estrategica",
+    "desarrollo-profesional",
+    "bienestar-corporativo",
+    "experiencias-de-integracion",
     "no-estoy-seguro",
   ]),
   participantRange: z.enum(["1-20", "20-50", "50-100", "100-500", "500+"]),
@@ -73,10 +73,10 @@ export const BUDGET_LABELS: Record<string, string> = {
   "prefer-to-discuss": "Prefiero discutirlo en la consulta",
 };
 
-/** Service type labels for display */
+/** Service (pillar) labels for display */
 export const SERVICE_LABELS: Record<string, string> = {
-  keynote: "Keynote / Conferencia",
-  "taller-corporativo": "Taller Corporativo",
-  "consultoria-estrategica": "Consultoría Estratégica",
+  "desarrollo-profesional": "Desarrollo Profesional",
+  "bienestar-corporativo": "Bienestar Corporativo",
+  "experiencias-de-integracion": "Experiencias de Integración",
   "no-estoy-seguro": "No estoy seguro — necesito asesoría",
 };

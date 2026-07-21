@@ -1,80 +1,96 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Mic2, Users, Compass } from "lucide-react";
+import { GraduationCap, Heart, Users } from "lucide-react";
 import { PlaceholderMedia } from "@/components/ui/placeholder-media";
 
 // ---------------------------------------------------------------------------
-// /servicios — Services Hub Page
+// /servicios — Pillars Hub Page (manual Ch.03 · Pilares)
 // ---------------------------------------------------------------------------
 
 export const metadata: Metadata = {
-  title: "Servicios",
+  title: "Experiencias",
   description:
-    "Keynotes, talleres corporativos y consultoría estratégica. Servicios de transformación ejecutiva diseñados a la medida de su organización.",
+    "Tres pilares — Desarrollo Profesional, Bienestar Corporativo y Experiencias de Integración — para transformar organizaciones desde lo humano.",
 };
 
 const SERVICES = [
   {
-    icon: Mic2,
-    slug: "keynotes",
-    title: "Keynotes y Conferencias",
-    tagline: "Inspirar. Provocar. Movilizar.",
+    icon: GraduationCap,
+    slug: "desarrollo-profesional",
+    title: "Desarrollo Profesional",
+    tagline: "Crecer. Liderar. Comunicar.",
     description:
-      "Conferencias magistrales de 45 a 90 minutos diseñadas para eventos corporativos, convenciones y cumbres de liderazgo. Cada keynote se personaliza para su industria, cultura y objetivos estratégicos.",
-    audience: "Eventos corporativos de 50 a 5,000+ asistentes",
+      "Hacemos crecer a las personas: sus capacidades, su liderazgo, su comunicación y su marca profesional. Experiencias diseñadas para desarrollar talento con impacto medible.",
+    audience: "Equipos de liderazgo, ventas, comunicación y talento.",
     topics: [
-      "Marca Personal Ejecutiva",
-      "Comunicación Corporativa de Alto Impacto",
-      "Identidad Digital y Reputación",
-      "Liderazgo y Transformación Cultural",
+      "Marca Personal",
+      "LinkedIn Estratégico",
+      "Storytelling",
+      "Data Storytelling",
+      "Cultura Organizacional",
+      "Liderazgo",
+      "Comunicación",
+      "Ventas",
+      "Negociación",
+      "Reputación Profesional",
+      "Desarrollo de Equipos",
     ],
-    photoInstructions: `FOTOGRAFÍA SERVICIO: KEYNOTES
-• Ana en el escenario, hablando ante una audiencia corporativa grande
-• Ángulo desde un costado del escenario, capturando tanto a la speaker como al público
-• Iluminación de escenario dramática, fondo oscuro
+    photoInstructions: `FOTOGRAFÍA PILAR: DESARROLLO PROFESIONAL
+• Personas en una experiencia de aprendizaje — participación activa, energía
+• Facilitación cercana, no clase magistral fría
+• Ambiente de sala de trabajo cálida, luz natural
+• Capturar interacción real entre participantes
+• 3000px ancho mínimo, JPEG calidad 90+`,
+  },
+  {
+    icon: Heart,
+    slug: "bienestar-corporativo",
+    title: "Bienestar Corporativo",
+    tagline: "Cuidar. Equilibrar. Renovar.",
+    description:
+      "Cuidamos a las personas: su energía, su salud y su equilibrio, dentro y fuera del trabajo. Experiencias de bienestar que se sienten y se recuerdan.",
+    audience: "Áreas de RRHH, cultura y bienestar; equipos completos.",
+    topics: [
+      "Wellness Day",
+      "Masajes en oficina",
+      "Aromaterapia",
+      "Yoga Facial",
+      "Taller de Automaquillaje",
+      "Spa Corporativo",
+      "Pausas Activas",
+      "Activaciones de Bienestar",
+      "Bienestar Integral",
+    ],
+    photoInstructions: `FOTOGRAFÍA PILAR: BIENESTAR CORPORATIVO
+• Momento de bienestar en el entorno laboral — calma, cuidado, cercanía
+• Personas relajadas y presentes (pausa activa, masaje, wellness day)
+• Paleta cálida y luminosa, sensación de cuidado
+• Sin poses forzadas; capturar el bienestar real
 • 3000px ancho mínimo, JPEG calidad 90+`,
   },
   {
     icon: Users,
-    slug: "talleres-corporativos",
-    title: "Talleres Corporativos",
-    tagline: "Entrenar. Practicar. Transformar.",
+    slug: "experiencias-de-integracion",
+    title: "Experiencias de Integración",
+    tagline: "Conectar. Pertenecer. Celebrar.",
     description:
-      "Programas de entrenamiento inmersivos de medio día o día completo para equipos de 15 a 500+ participantes. Metodología práctica con dinámicas, ejercicios y planes de acción individuales.",
-    audience: "Equipos de liderazgo, ventas, RRHH y marketing",
+      "Conectamos a las personas: creamos pertenencia, confianza y una cultura que se vive en equipo. Experiencias que unen y dejan huella.",
+    audience: "Organizaciones completas, equipos y liderazgo.",
     topics: [
-      "Personal Branding para Equipos",
-      "Storytelling para Equipos de Ventas",
-      "LinkedIn Estratégico",
-      "Negociación y Prospección",
-      "Identidad, Imagen y Reputación",
+      "Team Building",
+      "Kick Off",
+      "Rallys",
+      "Workshops",
+      "Actividades Colaborativas",
+      "Experiencias Temáticas",
+      "Dinámicas de Cultura",
+      "Activaciones Corporativas",
     ],
-    photoInstructions: `FOTOGRAFÍA SERVICIO: TALLERES
-• Grupo de ejecutivos en un taller interactivo — manos activas, colaboración visible
-• Sala de entrenamiento corporativa premium
-• Ana facilitando, de pie, interactuando con los participantes
-• Capturar materiales de trabajo sobre la mesa (post-its, workbooks branded)
-• 3000px ancho mínimo, JPEG calidad 90+`,
-  },
-  {
-    icon: Compass,
-    slug: "consultoria-estrategica",
-    title: "Consultoría Estratégica",
-    tagline: "Diagnosticar. Diseñar. Acompañar.",
-    description:
-      "Asesoría ejecutiva personalizada para líderes y equipos de dirección. Desde auditorías de comunicación corporativa hasta estrategias integrales de marca y presencia digital.",
-    audience: "C-suite, directores y equipos de liderazgo",
-    topics: [
-      "Estrategia de Marca Corporativa",
-      "Auditoría de Comunicación",
-      "Transformación de Presencia Digital",
-      "Coaching Ejecutivo (Ontológico)",
-    ],
-    photoInstructions: `FOTOGRAFÍA SERVICIO: CONSULTORÍA
-• Reunión ejecutiva en sala de juntas premium — 2-4 personas
-• Ana en conversación 1:1 o small group, ambiente de confianza
-• Mesa de conferencia de alta gama, iluminación natural lateral
-• Enfoque en gestos de comunicación, sin posar
+    photoInstructions: `FOTOGRAFÍA PILAR: EXPERIENCIAS DE INTEGRACIÓN
+• Equipo conectando en una experiencia grupal — risas, colaboración, energía
+• Team building o kick off en acción, movimiento real
+• Ambiente vibrante, sentido de pertenencia visible
+• Capturar el momento en que un equipo "vuelve a mirarse"
 • 3000px ancho mínimo, JPEG calidad 90+`,
   },
 ] as const;
@@ -85,15 +101,15 @@ export default function ServiciosPage() {
       {/* --- Page Header --- */}
       <section className="bg-primary grain-overlay pt-32 pb-16 md:pb-20">
         <div className="container-narrow text-center">
-          <span className="inline-block text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-4">
-            Servicios
+          <span className="inline-block text-highlight text-xs font-semibold tracking-[0.25em] uppercase mb-4">
+            Nuestros pilares
           </span>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-inverse leading-tight">
-            Transformación ejecutiva a la medida
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-text-inverse leading-tight">
+            Experiencias que transforman desde lo humano
           </h1>
           <p className="mt-6 text-lg text-text-inverse/60 max-w-2xl mx-auto">
-            Tres pilares de servicio diseñados para organizaciones que no buscan
-            eventos genéricos — buscan resultados.
+            Tres pilares para desarrollar, cuidar y conectar a las personas —
+            diseñados a la medida de la realidad de cada organización.
           </p>
         </div>
       </section>
@@ -172,11 +188,11 @@ export default function ServiciosPage() {
 
                   <Link
                     href="/contacto"
-                    className="inline-flex items-center mt-8 px-8 py-3 bg-accent text-primary
+                    className="inline-flex items-center mt-8 px-8 py-3 bg-highlight text-primary
                                text-sm font-semibold tracking-[0.08em] uppercase
-                               hover:bg-accent-hover transition-colors duration-300"
+                               hover:brightness-95 transition-all duration-300"
                   >
-                    Solicitar Propuesta
+                    Diseñemos esta experiencia
                   </Link>
                 </div>
               </div>

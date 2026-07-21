@@ -1,201 +1,211 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PlaceholderMedia } from "@/components/ui/placeholder-media";
 import { SectionHeading } from "@/components/ui/section-heading";
-import {
-  GraduationCap,
-  Award,
-  Briefcase,
-  Globe,
-} from "lucide-react";
+import { Heart, Users, Sparkles, Lightbulb, Award } from "lucide-react";
 
 // ---------------------------------------------------------------------------
-// /nosotros — About Page
+// /nosotros — About: the Ana Banana Experiences brand (manual Ch.01–02, 04)
 // ---------------------------------------------------------------------------
 
 export const metadata: Metadata = {
   title: "Nosotros",
   description:
-    "Conozca a Ana Gabriela — conferencista corporativa, facilitadora ejecutiva y estratega de marca con trayectoria internacional.",
+    "Ana Banana Experiences diseña experiencias corporativas que transforman organizaciones desde lo humano. Esencia, valores y arquetipos de la marca.",
 };
 
-const CREDENTIALS = [
+// Valores (manual Ch.02 · Valores) — descriptions verbatim
+const VALORES = [
   {
-    icon: GraduationCap,
-    title: "Formación Académica",
-    items: [
-      "Lic. Ciencias de la Comunicación y Administración Industrial",
-      "MBA — Maestría en Administración de Empresas",
-    ],
+    icon: Heart,
+    title: "Humanidad",
+    description:
+      "Ponemos a las personas en el centro de cada experiencia, creando espacios donde puedan crecer, conectar y sentirse valoradas.",
+  },
+  {
+    icon: Users,
+    title: "Conexión",
+    description:
+      "Fomentamos relaciones auténticas que fortalecen la colaboración, la confianza y el sentido de pertenencia dentro de las organizaciones.",
+  },
+  {
+    icon: Sparkles,
+    title: "Transformación",
+    description:
+      "Diseñamos experiencias con propósito que generan cambios positivos y duraderos en las personas, los equipos y la cultura organizacional.",
+  },
+  {
+    icon: Lightbulb,
+    title: "Creatividad",
+    description:
+      "Desarrollamos experiencias innovadoras y personalizadas que responden a las necesidades de cada organización.",
   },
   {
     icon: Award,
-    title: "Certificaciones",
-    items: [
-      "Coaching Ontológico",
-      "Liderazgo para la Nueva Manera de Trabajar",
-      "Transformación Digital",
-      "Trainer Certificada de META (Mercadeo Digital)",
-      "Metodologías Ágiles",
-    ],
-  },
-  {
-    icon: Briefcase,
-    title: "Experiencia Corporativa",
-    items: [
-      "Mercadeo y Desarrollo de Negocios",
-      "User Experience (UX)",
-      "Comunicación Corporativa",
-      "Relaciones Públicas y Publicidad",
-    ],
-  },
-  {
-    icon: Globe,
-    title: "Fundadora",
-    items: [
-      "Grupo anabanana, S.A.",
-      "Wellnest, S.A.",
-    ],
+    title: "Excelencia",
+    description:
+      "Trabajamos con profesionalismo y atención al detalle para ofrecer experiencias de alto valor e impacto.",
   },
 ] as const;
 
-const METHODOLOGY_STEPS = [
+// Arquetipos (manual Ch.02 · Arquetipos) — descriptions verbatim
+const ARQUETIPOS = [
   {
-    step: "01",
-    title: "Diagnóstico",
+    title: "El Cuidador",
     description:
-      "Escuchamos. Mapeamos sus objetivos, cultura organizacional y puntos de dolor. Cada programa parte de un entendimiento profundo de su realidad.",
+      "Existe para proteger, acompañar y hacer sentir bien a las personas. Es la raíz de nuestra empatía y de nuestro foco en el bienestar.",
   },
   {
-    step: "02",
-    title: "Diseño a la Medida",
+    title: "El Creador",
     description:
-      "Creamos una propuesta única. Ni genérica, ni reciclada. Contenido, formato y dinámica se diseñan específicamente para su equipo.",
+      "Aporta la imaginación y el diseño. Nos impulsa a construir experiencias originales, memorables y a medida, en lugar de repetir fórmulas.",
   },
   {
-    step: "03",
-    title: "Ejecución + Impacto",
+    title: "El Sabio",
     description:
-      "Entregamos con estándar premium. Medimos resultados. Le acompañamos en el seguimiento post-evento para asegurar que el impacto perdure.",
+      "Aporta criterio, estrategia y credibilidad. Es la razón por la que trabajamos desde el porqué y no solo desde la actividad.",
   },
 ] as const;
 
 export default function NosotrosPage() {
   return (
     <>
-      {/* --- Hero + Bio --- */}
+      {/* --- Hero + Historia --- */}
       <section className="bg-primary grain-overlay pt-32 pb-20 md:pb-28">
         <div className="container-narrow">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-            {/* Portrait */}
+            {/* Text */}
+            <div>
+              <span className="inline-block text-highlight text-xs font-semibold tracking-[0.2em] uppercase mb-4">
+                Quiénes somos
+              </span>
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-inverse leading-tight">
+                Transformamos organizaciones{" "}
+                <span className="italic text-highlight">desde las personas.</span>
+              </h1>
+              <div className="mt-8 space-y-4 text-text-inverse/70 leading-relaxed">
+                <p>
+                  Hay un momento que se repite en casi todas las organizaciones:
+                  la gente deja de mirarse. Las metas se cumplen, las reuniones
+                  se suceden, y en medio de todo eso las personas se vuelven
+                  invisibles entre sí. La empresa avanza, pero algo esencial se
+                  apaga.
+                </p>
+                <p>
+                  Ana Banana Experiences nació para encender de nuevo ese algo.
+                  No para dar un taller más, sino para crear el momento en que un
+                  equipo vuelve a verse, a reírse, a confiar y a recordar por qué
+                  eligió trabajar junto.
+                </p>
+                <p>
+                  Creemos que las empresas crecen cuando las personas crecen. Por
+                  eso diseñamos experiencias que desarrollan, cuidan y conectan a
+                  la gente —siempre desde la estrategia, siempre con cuidado del
+                  detalle, siempre con las personas en el centro.
+                </p>
+              </div>
+            </div>
+
+            {/* Image */}
             <PlaceholderMedia
               variant="photo"
               aspectRatio="3/4"
               dark
-              label="Retrato Ejecutivo"
-              instructions={`RETRATO EJECUTIVO — Especificaciones:
-• Setup A: Headshot, contacto visual directo, expresión confiada y accesible, fondo oscuro neutro.
-• Setup B: 3/4 cuerpo, postura de poder (de pie, brazos relajados o cruzados), vestuario corporativo (blazer estructurado, tonos oscuros sólidos), profundidad de campo reducida.
-• Iluminación: Rembrandt o loop. Sin flash directo.
-• Retoque: natural, sin filtros pesados.
-• Entrega: mínimo 3000px de ancho. TIFF (master) + JPEG (web, calidad 90).`}
+              label="Experiencia Ana Banana"
+              instructions={`IMAGEN NOSOTROS — Especificaciones:
+• Personas conectando en una experiencia corporativa real
+• Calidez humana: sonrisas genuinas, cercanía, presencia
+• NO retrato ejecutivo frío ni montaje corporativo
+• Luz natural, paleta cálida, ligeramente desaturada
+• Entrega: mínimo 3000px de ancho, JPEG calidad 90+`}
             />
-
-            {/* Bio */}
-            <div>
-              <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-                Sobre Ana Gabriela
-              </span>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-text-inverse leading-tight">
-                Comunicadora. Facilitadora. Estratega.
-              </h1>
-              <div className="mt-8 space-y-4 text-text-inverse/70 leading-relaxed">
-                <p>
-                  Comunicadora corporativa, facilitadora ejecutiva y estratega de marca
-                  con más de [X] años liderando procesos de transformación en empresas
-                  de alto rendimiento.
-                </p>
-                <p>
-                  Como fundadora de Grupo anabanana, S.A. y Wellnest, S.A., ha
-                  diseñado y ejecutado programas de entrenamiento, conferencias y
-                  consultorías estratégicas para organizaciones que exigen resultados
-                  medibles — desde programas de marca personal para equipos de liderazgo
-                  hasta estrategias de comunicación corporativa para compañías con
-                  presupuestos superiores al millón de quetzales.
-                </p>
-                <p>
-                  A lo largo de su trayectoria, ha liderado áreas de Mercadeo,
-                  Desarrollo de Negocios, User Experience, Comunicación, Relaciones
-                  Públicas y Publicidad. Como facilitadora y conferencista, ha
-                  compartido escenario en foros nacionales e internacionales sobre
-                  Identidad Digital, Storytelling Corporativo y Marca Personal
-                  Ejecutiva.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* --- Credentials Grid --- */}
+      {/* --- Esencia · Promesa · Mensaje --- */}
       <section className="section-padding bg-surface">
-        <div className="container-narrow">
-          <SectionHeading
-            tag="Trayectoria"
-            title="Formación y credenciales"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {CREDENTIALS.map(({ icon: Icon, title, items }) => (
-              <div
-                key={title}
-                className="p-8 bg-white border border-border"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <Icon className="w-5 h-5 text-accent" strokeWidth={1.5} />
-                  <h3 className="font-display text-lg font-bold text-primary">
-                    {title}
-                  </h3>
-                </div>
-                <ul className="space-y-2">
-                  {items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-sm text-text-muted leading-relaxed pl-4
-                                 border-l-2 border-accent/20"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+        <div className="container-narrow max-w-3xl text-center">
+          <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-6">
+            Nuestra esencia
+          </span>
+          <p className="font-display text-3xl md:text-4xl text-primary leading-tight">
+            Transformar{" "}
+            <span className="italic">desde lo humano.</span>
+          </p>
+          <p className="mt-8 text-lg text-text-muted leading-relaxed">
+            Nuestra promesa: cada experiencia que diseñamos deja a las personas y
+            a su organización mejor de lo que las encontramos. No prometemos
+            actividades entretenidas —prometemos impacto real, medible en cultura,
+            vínculos y desarrollo.
+          </p>
         </div>
       </section>
 
-      {/* --- Methodology --- */}
-      <section className="section-padding bg-primary grain-overlay">
+      {/* --- Valores --- */}
+      <section className="section-padding bg-white">
         <div className="container-narrow">
           <SectionHeading
-            tag="Metodología"
-            title="Cómo trabajamos"
-            description="Un proceso riguroso diseñado para generar impacto real — no eventos genéricos."
-            dark
+            tag="Valores"
+            title="Lo que nos sostiene"
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {METHODOLOGY_STEPS.map(({ step, title, description }) => (
-              <div key={step} className="relative">
-                <span className="block font-display text-6xl font-bold text-accent/15 mb-2">
-                  {step}
-                </span>
-                <h3 className="font-display text-xl font-bold text-text-inverse mt-[-0.5rem]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {VALORES.map(({ icon: Icon, title, description }) => (
+              <div key={title} className="p-8 bg-surface border border-border">
+                <div className="w-12 h-12 flex items-center justify-center bg-soft/40 text-primary">
+                  <Icon className="w-6 h-6" strokeWidth={1.5} />
+                </div>
+                <h3 className="mt-6 font-display text-xl font-semibold text-primary">
                   {title}
                 </h3>
-                <p className="mt-3 text-sm text-text-inverse/50 leading-relaxed">
+                <p className="mt-3 text-sm text-text-muted leading-relaxed">
                   {description}
                 </p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* --- Arquetipos --- */}
+      <section className="section-padding bg-primary grain-overlay">
+        <div className="container-narrow">
+          <SectionHeading
+            tag="Arquetipos"
+            title="El carácter de la marca"
+            description="Ana Banana Experiences combina tres arquetipos: uno que la define, uno que le da forma y uno que le da autoridad."
+            dark
+          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            {ARQUETIPOS.map(({ title, description }) => (
+              <div key={title} className="md:border-l md:border-border-dark md:pl-8">
+                <h3 className="font-display text-2xl font-semibold text-text-inverse">
+                  {title}
+                </h3>
+                <p className="mt-4 text-sm text-text-inverse/60 leading-relaxed">
+                  {description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- CTA --- */}
+      <section className="section-padding bg-surface">
+        <div className="container-narrow text-center max-w-2xl">
+          <h2 className="font-display text-2xl md:text-3xl font-semibold text-primary">
+            Las organizaciones más fuertes no son las que más exigen,{" "}
+            <span className="italic">sino las que mejor cuidan.</span>
+          </h2>
+          <Link
+            href="/contacto"
+            className="inline-flex items-center mt-8 px-10 py-4 bg-highlight text-primary
+                       text-sm font-semibold tracking-[0.1em] uppercase
+                       hover:brightness-95 transition-all duration-300"
+          >
+            Conversemos
+          </Link>
         </div>
       </section>
     </>

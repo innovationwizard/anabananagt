@@ -7,39 +7,39 @@ import { PlaceholderMedia } from "@/components/ui/placeholder-media";
 // ---------------------------------------------------------------------------
 
 export const metadata: Metadata = {
-  title: "Portafolio",
+  title: "Experiencias",
   description:
-    "Casos de éxito: eventos corporativos, keynotes y programas de entrenamiento ejecutivo que generaron resultados medibles.",
+    "Experiencias corporativas de desarrollo, bienestar e integración que transformaron equipos y culturas desde lo humano.",
 };
 
-// Placeholder case studies — replaced by Sanity content once populated
+// Placeholder experiences — replaced by Sanity content once populated
 const PLACEHOLDER_CASES = [
   {
     slug: "caso-1",
-    clientAlias: "Banco Tier 1 Regional",
+    clientAlias: "Banco regional",
     industry: "Banca y Finanzas",
-    serviceType: "Evento Integral",
-    metric: "500+ asistentes",
+    serviceType: "Experiencias de Integración",
+    metric: "500+ personas",
   },
   {
     slug: "caso-2",
-    clientAlias: "Corporación Industrial",
+    clientAlias: "Compañía industrial",
     industry: "Manufactura",
-    serviceType: "Taller Corporativo",
+    serviceType: "Bienestar Corporativo",
     metric: "92% satisfacción",
   },
   {
     slug: "caso-3",
-    clientAlias: "Empresa de Telecomunicaciones",
+    clientAlias: "Empresa de telecomunicaciones",
     industry: "Telecomunicaciones",
-    serviceType: "Keynote",
-    metric: "300+ ejecutivos",
+    serviceType: "Desarrollo Profesional",
+    metric: "300+ personas",
   },
   {
     slug: "caso-4",
-    clientAlias: "Firma de Servicios Profesionales",
+    clientAlias: "Firma de servicios profesionales",
     industry: "Servicios Profesionales",
-    serviceType: "Consultoría",
+    serviceType: "Desarrollo Profesional",
     metric: "12 semanas",
   },
 ] as const;
@@ -50,14 +50,14 @@ export default function PortafolioPage() {
       {/* --- Page Header --- */}
       <section className="bg-primary grain-overlay pt-32 pb-16 md:pb-20">
         <div className="container-narrow text-center">
-          <span className="inline-block text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-4">
-            Portafolio
+          <span className="inline-block text-highlight text-xs font-semibold tracking-[0.25em] uppercase mb-4">
+            Experiencias
           </span>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-text-inverse leading-tight">
-            Resultados que hablan
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-text-inverse leading-tight">
+            Experiencias que dejan huella
           </h1>
           <p className="mt-6 text-lg text-text-inverse/60 max-w-2xl mx-auto">
-            Una selección curada de proyectos corporativos que reflejan nuestro estándar de excelencia.
+            Una selección de experiencias corporativas que transformaron equipos y culturas desde lo humano.
           </p>
         </div>
       </section>
@@ -82,7 +82,7 @@ export default function PortafolioPage() {
                     dark={false}
                     label={clientAlias}
                     className="!rounded-none !border-0 !border-b border-border"
-                    instructions={`FOTOGRAFÍA CASO DE ÉXITO: ${clientAlias}
+                    instructions={`FOTOGRAFÍA EXPERIENCIA: ${clientAlias}
 • Imagen principal del evento o sesión
 • Wide shot que muestre escala y producción
 • Alto contraste, ligeramente desaturado
@@ -115,7 +115,7 @@ export default function PortafolioPage() {
                     <span className="inline-block mt-4 text-xs font-semibold tracking-[0.1em]
                                      uppercase text-text-muted group-hover:text-accent
                                      transition-colors duration-300">
-                      Ver caso completo →
+                      Ver experiencia →
                     </span>
                   </div>
                 </Link>

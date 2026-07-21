@@ -1,27 +1,39 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   ANABANANA — Design System Tokens
-   Aesthetic: "Quiet Authority" — dark, editorial, premium
+   ANA BANANA EXPERIENCES — Design System Tokens
+   Brand manual: docs/manual-ana-banana.pdf (v1.0 — 2026)
+   Essence: "Transformar desde lo humano." Human + strategic, warm + rigorous.
    ========================================================================== */
 
 @theme inline {
-  /* --- Color Palette --- */
-  --color-primary:       #0A0F1C;
-  --color-secondary:     #1A2332;
-  --color-accent:        #C9A96E;
-  --color-accent-hover:  #B8943F;
-  --color-surface:       #F7F5F0;
-  --color-surface-warm:  #EDE8DF;
-  --color-text-primary:  #0A0F1C;
-  --color-text-inverse:  #F7F5F0;
-  --color-text-muted:    #6B7280;
-  --color-border:        #E5E1D8;
-  --color-border-dark:   #2A3342;
+  /* --- Brand palette (manual Ch.05 · Colorimetría) — the ONLY allowed colors --- */
+  --color-lime:          #ECFE79;  /* Lime Glow    — highlight, dots, emphasis on dark */
+  --color-electric-blue: #2E46D4;  /* Electric Blue— links, emphasis, interactive */
+  --color-soft-blue:     #99BAD7;  /* Soft Blue    — soft panels, chips, dot */
+  --color-deep-navy:     #243054;  /* Deep Navy    — dark bg + primary text */
+  --color-light-gray:    #E2E2E2;  /* Light Gray   — borders, neutral surfaces */
 
-  /* --- Typography --- */
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body:    "Source Sans 3", system-ui, sans-serif;
+  /* --- Semantic tokens (names preserved to minimize churn; see D1 in plan) --- */
+  --color-primary:       #243054;  /* Deep Navy — dark bg + text on light */
+  --color-secondary:     #2C3A61;  /* navy tint — cards on dark (derived) */
+  --color-accent:        #2E46D4;  /* Electric Blue — eyebrows/links/interactive on light (AA on white) */
+  --color-accent-hover:  #2438A6;  /* deeper electric blue (derived) */
+  --color-highlight:     #ECFE79;  /* Lime — decorative on dark / dots only, never text on white */
+  --color-soft:          #99BAD7;  /* Soft Blue — panels, audience chips */
+  --color-surface:       #F6F7F9;  /* cool near-white — light sections */
+  --color-surface-warm:  #EDEFF3;  /* light blue-gray — placeholder bg (derived) */
+  --color-text-primary:  #243054;  /* Deep Navy on light */
+  --color-text-inverse:  #F4F2EA;  /* cream/ivory on navy (matches logo wordmark) */
+  --color-text-muted:    #5C6675;  /* cool gray — secondary text */
+  --color-border:        #E2E2E2;  /* Light Gray */
+  --color-border-dark:   #35446B;  /* navy border (derived) */
+
+  /* --- Typography (manual Ch.05 · Tipografía) --- */
+  /* Playfair (titulares/citas) + Montserrat as the free substitute for Gotham
+     ("Ghotam"). Font faces loaded via next/font in app/layout.tsx. */
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-body:    var(--font-montserrat), system-ui, sans-serif;
 
   /* --- Spacing Scale --- */
   --space-xs:  0.25rem;
@@ -65,7 +77,7 @@
   }
 
   ::selection {
-    background: var(--color-accent);
+    background: var(--color-highlight);
     color: var(--color-primary);
   }
 }

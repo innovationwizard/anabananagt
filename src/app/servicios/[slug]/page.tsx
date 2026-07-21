@@ -20,84 +20,82 @@ const SERVICES_DATA: Record<
     photoInstructions: string;
   }
 > = {
-  keynotes: {
-    title: "Keynotes y Conferencias",
-    tagline: "Inspirar. Provocar. Movilizar.",
+  "desarrollo-profesional": {
+    title: "Desarrollo Profesional",
+    tagline: "Crecer. Liderar. Comunicar.",
     description:
-      "Conferencias magistrales de 45 a 90 minutos diseñadas para transformar la manera en que su equipo piensa, se comunica y se posiciona. Cada keynote es una pieza única — investigada, contextualizada y adaptada a la cultura, industria y objetivos estratégicos de su organización.",
+      "Experiencias diseñadas para hacer crecer a las personas —sus capacidades, su liderazgo, su comunicación y su marca profesional. Cada programa se construye a partir del contexto real de su equipo, no de un catálogo.",
     audience:
-      "Eventos corporativos de 50 a 5,000+ asistentes. Convenciones anuales, cumbres de liderazgo, kick-offs de ventas, y eventos de marca empleadora.",
+      "Equipos de liderazgo, ventas, comunicación, RRHH y talento que quieren desarrollar capacidades con impacto medible.",
     deliverables: [
-      "Keynote de 45-90 minutos (presencial, virtual o híbrido)",
-      "Pre-producción: reunión de briefing con equipo organizador",
-      "Material de apoyo visual (presentación branded)",
-      "Sesión de Q&A post-conferencia (30 min)",
-      "Grabación autorizada para uso interno",
+      "Diagnóstico previo: objetivos, contexto y cultura del equipo",
+      "Experiencia a la medida (presencial, virtual o híbrida)",
+      "Facilitación con dinámicas prácticas y aplicables",
+      "Material de apoyo para participantes",
+      "Seguimiento y recomendaciones post-experiencia",
     ],
     outcomes: [
-      "Alineación del equipo en torno a un mensaje estratégico unificado",
-      "Activación de cambio cultural a través de narrativas poderosas",
-      "Posicionamiento de la marca empleadora ante audiencias internas y externas",
+      "Personas con nuevas capacidades de liderazgo y comunicación",
+      "Equipos más alineados y con una marca profesional más fuerte",
+      "Aprendizaje que se aplica desde el día siguiente",
     ],
-    photoInstructions: `FOTOGRAFÍA SERVICIO: KEYNOTES
-• Ana en el escenario de un auditorio corporativo grande (500+ asientos)
-• Ángulo lateral que capture speaker + audiencia en el mismo frame
-• Iluminación de escenario dramática, fondo oscuro
-• Segundo shot: close-up de Ana hablando, expresión apasionada y profesional
+    photoInstructions: `FOTOGRAFÍA PILAR: DESARROLLO PROFESIONAL
+• Personas en una experiencia de aprendizaje — participación activa, energía
+• Facilitación cercana, no clase magistral fría
+• Ambiente de sala de trabajo cálida, luz natural
+• Segundo shot: interacción real entre participantes
 • 3000px ancho mínimo, JPEG calidad 90+`,
   },
-  "talleres-corporativos": {
-    title: "Talleres Corporativos",
-    tagline: "Entrenar. Practicar. Transformar.",
+  "bienestar-corporativo": {
+    title: "Bienestar Corporativo",
+    tagline: "Cuidar. Equilibrar. Renovar.",
     description:
-      "Programas de entrenamiento inmersivos donde los participantes no solo aprenden — practican, reciben feedback y salen con un plan de acción individual. Cada taller combina teoría, dinámica grupal y ejercicios prácticos calibrados al nivel y contexto de su equipo.",
+      "Experiencias de bienestar que cuidan la energía, la salud y el equilibrio de las personas, dentro y fuera del trabajo. Bienestar que se siente, no que se anuncia.",
     audience:
-      "Equipos de liderazgo, ventas, marketing, RRHH y comunicación. Grupos de 15 a 500+ participantes. Empresas con facturación anual superior a Q50M.",
+      "Áreas de RRHH, cultura y bienestar que quieren cuidar a su gente de forma genuina y memorable.",
     deliverables: [
-      "Programa de medio día o día completo (presencial o virtual)",
-      "Diagnóstico pre-taller: encuesta o entrevistas con stakeholders clave",
-      "Material de trabajo para participantes (workbook branded)",
-      "Facilitación con dinámicas interactivas y ejercicios prácticos",
-      "Reporte post-taller: observaciones, recomendaciones, próximos pasos",
+      "Diseño de la experiencia según el momento del equipo",
+      "Activaciones de bienestar (wellness day, pausas activas, spa corporativo y más)",
+      "Facilitadores y especialistas de bienestar",
+      "Producción y cuidado del detalle en sitio",
+      "Cierre con sensación de cuidado y renovación",
     ],
     outcomes: [
-      "Equipos con herramientas prácticas aplicables desde el día siguiente",
-      "Mejora medible en métricas de comunicación, ventas o liderazgo",
-      "Cohesión de equipo fortalecida a través de la experiencia compartida",
+      "Personas con más energía, equilibrio y sensación de ser cuidadas",
+      "Un clima laboral más sano y humano",
+      "Bienestar percibido que fortalece el orgullo de pertenecer",
     ],
-    photoInstructions: `FOTOGRAFÍA SERVICIO: TALLERES CORPORATIVOS
-• Grupo de 20-30 ejecutivos en mesa de trabajo colaborativo
-• Ana de pie facilitando, interactuando directamente con participantes
-• Capturar materiales branded sobre la mesa (workbooks, post-its, markers)
-• Ambiente de hotel business center o sala de entrenamiento premium
-• Segundo shot: participantes en dinámica grupal, energía visible
+    photoInstructions: `FOTOGRAFÍA PILAR: BIENESTAR CORPORATIVO
+• Momento de bienestar en el entorno laboral — calma, cuidado, cercanía
+• Personas relajadas y presentes (pausa activa, masaje, wellness day)
+• Paleta cálida y luminosa, sensación de cuidado
+• Segundo shot: detalle de una activación de bienestar
 • 3000px ancho mínimo, JPEG calidad 90+`,
   },
-  "consultoria-estrategica": {
-    title: "Consultoría Estratégica",
-    tagline: "Diagnosticar. Diseñar. Acompañar.",
+  "experiencias-de-integracion": {
+    title: "Experiencias de Integración",
+    tagline: "Conectar. Pertenecer. Celebrar.",
     description:
-      "Asesoría personalizada para líderes y equipos de dirección que necesitan claridad estratégica en comunicación, marca y posicionamiento. No es coaching genérico — es un diagnóstico riguroso, un plan de acción concreto y acompañamiento en la ejecución.",
+      "Experiencias que conectan a las personas: crean pertenencia, confianza y una cultura que se vive en equipo. El momento en que un equipo vuelve a mirarse.",
     audience:
-      "C-suite, directores y equipos de liderazgo. Empresas en procesos de transformación, reposicionamiento de marca, o preparación para expansión regional/internacional.",
+      "Organizaciones y equipos que quieren fortalecer vínculos, confianza y sentido de pertenencia.",
     deliverables: [
-      "Sesión de diagnóstico estratégico (2-4 horas)",
-      "Auditoría de comunicación corporativa y presencia digital",
-      "Plan estratégico de marca / comunicación (documento ejecutivo)",
-      "Sesiones de acompañamiento (retainer mensual o por proyecto)",
-      "Coaching ejecutivo individual (metodología ontológica)",
+      "Diseño temático a la medida de la cultura y el objetivo",
+      "Experiencias de integración (team building, kick off, rallys, activaciones)",
+      "Facilitación y dinámicas colaborativas",
+      "Producción integral del evento o experiencia",
+      "Momentos memorables con propósito, no solo entretenimiento",
     ],
     outcomes: [
-      "Claridad estratégica en posicionamiento y comunicación de marca",
-      "Plan de acción ejecutable con métricas y timeline",
-      "Líderes más efectivos en su comunicación interna y externa",
+      "Equipos más unidos, con más confianza y pertenencia",
+      "Una cultura que se vive y se recuerda",
+      "Vínculos que sostienen la colaboración en el día a día",
     ],
-    photoInstructions: `FOTOGRAFÍA SERVICIO: CONSULTORÍA ESTRATÉGICA
-• Reunión ejecutiva en sala de juntas premium — Ana con 2-3 ejecutivos
-• Ambiente de confianza: conversación natural, no posada
-• Mesa de conferencia de alta gama, iluminación natural lateral
-• Segundo shot: Ana revisando documentos o presentación con un ejecutivo 1:1
-• Detalles: laptops, café, documentos estratégicos sobre la mesa
+    photoInstructions: `FOTOGRAFÍA PILAR: EXPERIENCIAS DE INTEGRACIÓN
+• Equipo conectando en una experiencia grupal — risas, colaboración, energía
+• Team building o kick off en acción, movimiento real
+• Ambiente vibrante, sentido de pertenencia visible
+• Segundo shot: el momento en que un equipo "vuelve a mirarse"
 • 3000px ancho mínimo, JPEG calidad 90+`,
   },
 };
@@ -132,10 +130,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         <div className="container-narrow">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div>
-              <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4">
+              <span className="inline-block text-highlight text-xs font-semibold tracking-[0.2em] uppercase mb-4">
                 {svc.tagline}
               </span>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-text-inverse leading-tight">
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-inverse leading-tight">
                 {svc.title}
               </h1>
               <p className="mt-6 text-text-inverse/60 leading-relaxed">
@@ -143,11 +141,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </p>
               <Link
                 href="/contacto"
-                className="inline-flex items-center mt-8 px-8 py-3 bg-accent text-primary
+                className="inline-flex items-center mt-8 px-8 py-3 bg-highlight text-primary
                            text-sm font-semibold tracking-[0.08em] uppercase
-                           hover:bg-accent-hover transition-colors duration-300"
+                           hover:brightness-95 transition-all duration-300"
               >
-                Solicitar Propuesta
+                Diseñemos esta experiencia
               </Link>
             </div>
             <PlaceholderMedia
@@ -219,20 +217,20 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       {/* --- CTA --- */}
       <section className="bg-primary grain-overlay py-16 md:py-20">
         <div className="container-narrow text-center">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-text-inverse">
-            ¿Este servicio es lo que su equipo necesita?
+          <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-inverse">
+            ¿Es esta la experiencia que su equipo necesita?
           </h2>
           <p className="mt-4 text-text-inverse/50 max-w-xl mx-auto">
-            Agende una consulta privada. Evaluaremos sus objetivos y le enviaremos
-            una propuesta personalizada.
+            Conversemos. Escuchamos sus objetivos y diseñamos una experiencia a la
+            medida de su organización.
           </p>
           <Link
             href="/contacto"
-            className="inline-flex items-center mt-8 px-10 py-4 bg-accent text-primary
+            className="inline-flex items-center mt-8 px-10 py-4 bg-highlight text-primary
                        text-sm font-semibold tracking-[0.1em] uppercase
-                       hover:bg-accent-hover transition-colors duration-300"
+                       hover:brightness-95 transition-all duration-300"
           >
-            Agendar Consulta
+            Conversemos
           </Link>
         </div>
       </section>

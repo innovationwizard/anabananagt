@@ -7,14 +7,14 @@ import { motion } from "framer-motion";
 // ---------------------------------------------------------------------------
 
 const STATS = [
-  { value: "XX+", label: "Empresas Impactadas" },
-  { value: "XX+", label: "Ejecutivos Entrenados" },
-  { value: "XX+", label: "Años de Experiencia" },
-  { value: "XX+", label: "Países" },
+  { value: "XX+", label: "Organizaciones acompañadas" },
+  { value: "XX+", label: "Personas impactadas" },
+  { value: "XX+", label: "Experiencias diseñadas" },
+  { value: "XX+", label: "Años transformando culturas" },
 ] as const;
 
-// NOTE: Replace "XX+" with real numbers once client provides them.
-// These are the single most persuasive element on the page.
+// NOTE: Replace "XX+" with real numbers once the client provides them (see
+// BRAND_REFACTOR_PLAN.md · D3). These are the most persuasive element here.
 
 export function StatsStrip() {
   return (
@@ -30,7 +30,7 @@ export function StatsStrip() {
               transition={{ delay: i * 0.1, duration: 0.6 }}
               className="text-center"
             >
-              <span className="block font-display text-4xl md:text-5xl font-bold text-accent">
+              <span className="block font-display text-4xl md:text-5xl font-semibold text-highlight">
                 {value}
               </span>
               <span className="block mt-2 text-xs font-semibold tracking-[0.12em] uppercase text-text-inverse/40">

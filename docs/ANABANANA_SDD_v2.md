@@ -616,6 +616,16 @@ On valid submission:
 
 ## 7. UI/UX Design System
 
+> ⚠️ **SUPERSEDED (2026-07-20).** This section describes the original gold
+> "Quiet Authority" system for the *Ana Gabriela keynote* positioning. It has
+> been **replaced by the brand manual** (`docs/manual-ana-banana.pdf`, "ana
+> banana Experiences") — navy/soft-blue/electric-blue/lime palette, Playfair +
+> Montserrat (Gotham substitute), and the "Transformar desde lo humano" voice.
+> The gold accent is now an explicitly *forbidden* use. See
+> [`docs/BRAND_REFACTOR_PLAN.md`](BRAND_REFACTOR_PLAN.md) for the current tokens.
+> The rest of this SDD (architecture, data model, intake funnel, deployment)
+> remains valid.
+
 ### 7.1 Aesthetic Direction
 
 **"Quiet Authority"** — The visual language of a brand that doesn't need to shout. Think: McKinsey's website meets Aman Resorts' editorial photography. Zero clutter. Every pixel earns its place.

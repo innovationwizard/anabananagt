@@ -47,20 +47,20 @@ export function Navbar() {
           {/* --- Logo --- */}
           <Link
             href="/"
-            aria-label="anabanana — inicio"
+            aria-label="ana banana Experiences — inicio"
             className="group flex items-center gap-3 text-text-inverse
-                       hover:text-accent transition-colors duration-300"
+                       hover:text-highlight transition-colors duration-300"
           >
             <Image
-              src="/brand/anabananagt_logo_mark.png"
+              src="/brand/ab-isotipo-on-softblue.png"
               alt=""
-              width={36}
-              height={36}
+              width={40}
+              height={40}
               priority
-              className="h-9 w-9 object-contain"
+              className="h-10 w-10 rounded-lg object-cover"
             />
-            <span className="font-display text-xl font-bold tracking-tight">
-              anabanana
+            <span className="font-display text-xl font-semibold tracking-tight">
+              ana banana
             </span>
           </Link>
 
@@ -71,7 +71,7 @@ export function Navbar() {
                 key={href}
                 href={href}
                 className="text-sm font-semibold tracking-[0.08em] uppercase text-text-inverse/70
-                           hover:text-accent transition-colors duration-300"
+                           hover:text-highlight transition-colors duration-300"
               >
                 {label}
               </Link>
@@ -83,11 +83,11 @@ export function Navbar() {
             <Link
               href="/contacto"
               className="hidden md:inline-flex items-center px-6 py-2.5
-                         bg-accent text-primary text-sm font-semibold
+                         bg-highlight text-primary text-sm font-semibold
                          tracking-[0.06em] uppercase rounded-none
-                         hover:bg-accent-hover transition-colors duration-300"
+                         hover:brightness-95 transition-all duration-300"
             >
-              Agendar Consulta
+              Conversemos
             </Link>
 
             <button
@@ -122,8 +122,8 @@ export function Navbar() {
                 <Link
                   href={href}
                   onClick={() => setMobileOpen(false)}
-                  className="font-display text-3xl font-bold text-text-inverse
-                             hover:text-accent transition-colors"
+                  className="font-display text-3xl font-semibold text-text-inverse
+                             hover:text-highlight transition-colors"
                 >
                   {label}
                 </Link>
@@ -137,11 +137,11 @@ export function Navbar() {
               <Link
                 href="/contacto"
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center px-8 py-3 bg-accent text-primary
+                className="inline-flex items-center px-8 py-3 bg-highlight text-primary
                            text-sm font-semibold tracking-[0.08em] uppercase
-                           hover:bg-accent-hover transition-colors"
+                           hover:brightness-95 transition-all"
               >
-                Agendar Consulta
+                Conversemos
               </Link>
             </motion.div>
           </motion.div>

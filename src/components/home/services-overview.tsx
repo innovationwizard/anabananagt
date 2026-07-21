@@ -2,34 +2,34 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mic2, Users, Compass } from "lucide-react";
+import { GraduationCap, Heart, Users } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 // ---------------------------------------------------------------------------
-// ServicesOverview — Three-column bento grid of service pillars
+// ServicesOverview — The three brand pillars (manual Ch.03 · Pilares)
 // ---------------------------------------------------------------------------
 
 const SERVICES = [
   {
-    icon: Mic2,
-    title: "Keynotes y Conferencias",
+    icon: GraduationCap,
+    title: "Desarrollo Profesional",
     description:
-      "Conferencias magistrales diseñadas para inspirar, provocar reflexión y movilizar a su equipo. Desde marca personal hasta identidad digital corporativa.",
-    href: "/servicios/keynotes",
+      "Hacer crecer a las personas: sus capacidades, su liderazgo, su comunicación y su marca profesional.",
+    href: "/servicios/desarrollo-profesional",
+  },
+  {
+    icon: Heart,
+    title: "Bienestar Corporativo",
+    description:
+      "Cuidar a las personas: su energía, su salud y su equilibrio, dentro y fuera del trabajo.",
+    href: "/servicios/bienestar-corporativo",
   },
   {
     icon: Users,
-    title: "Talleres Corporativos",
+    title: "Experiencias de Integración",
     description:
-      "Programas de entrenamiento inmersivos para equipos de 15 a 500+ participantes. Storytelling, negociación, prospección, LinkedIn estratégico.",
-    href: "/servicios/talleres-corporativos",
-  },
-  {
-    icon: Compass,
-    title: "Consultoría Estratégica",
-    description:
-      "Asesoría ejecutiva 1:1 y para equipos de liderazgo. Estrategia de marca, auditorías de comunicación, transformación de presencia digital.",
-    href: "/servicios/consultoria-estrategica",
+      "Conectar a las personas: crear pertenencia, confianza y una cultura que se vive en equipo.",
+    href: "/servicios/experiencias-de-integracion",
   },
 ] as const;
 
@@ -38,9 +38,9 @@ export function ServicesOverview() {
     <section className="section-padding bg-surface">
       <div className="container-narrow">
         <SectionHeading
-          tag="Qué Hacemos"
-          title="Tres pilares de transformación corporativa"
-          description="Cada servicio se diseña a la medida de sus objetivos, industria y cultura organizacional."
+          tag="Nuestros pilares"
+          title="Tres pilares para transformar desde lo humano"
+          description="Cada experiencia se diseña a la medida de su realidad, sus objetivos y la cultura de su organización."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">

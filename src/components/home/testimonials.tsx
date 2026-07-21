@@ -10,24 +10,24 @@ import { SectionHeading } from "@/components/ui/section-heading";
 const PLACEHOLDER_TESTIMONIALS = [
   {
     quote:
-      "«Placeholder: Inserte testimonio real de un cliente corporativo. Idealmente 2-3 oraciones describiendo el impacto del servicio en su organización.»",
-    author: "Nombre del Ejecutivo",
-    role: "Director/a de RRHH",
-    company: "Empresa Fortune 500 Regional",
+      "«Placeholder: testimonio real de un cliente. Idealmente 2-3 oraciones sobre cómo la experiencia impactó a las personas y la cultura de la organización.»",
+    author: "Nombre del líder",
+    role: "Dirección de RRHH",
+    company: "Empresa regional",
   },
   {
     quote:
-      "«Placeholder: Segundo testimonio. Enfóquese en resultados medibles — participación del equipo, cambio cultural, ROI del evento.»",
-    author: "Nombre del Ejecutivo",
-    role: "Gerente General",
-    company: "Banco Tier 1",
+      "«Placeholder: segundo testimonio. Enfóquese en el cambio en clima, vínculos y sentido de pertenencia del equipo tras la experiencia.»",
+    author: "Nombre del líder",
+    role: "Gerencia General",
+    company: "Grupo corporativo",
   },
   {
     quote:
-      "«Placeholder: Tercer testimonio. Destaque la experiencia premium, la personalización del servicio y la profesionalidad.»",
-    author: "Nombre del Ejecutivo",
-    role: "VP de Talento Humano",
-    company: "Corporación Industrial",
+      "«Placeholder: tercer testimonio. Destaque el cuidado del detalle, la personalización y el bienestar que sintieron las personas.»",
+    author: "Nombre del líder",
+    role: "Gerencia de Talento",
+    company: "Compañía industrial",
   },
 ] as const;
 
@@ -37,8 +37,8 @@ export function Testimonials() {
       <div className="container-narrow">
         <SectionHeading
           tag="Testimonios"
-          title="Lo que dicen nuestros clientes"
-          description="Cada proyecto es una relación de confianza con equipos ejecutivos que exigen excelencia."
+          title="Lo que dicen quienes confían en nosotros"
+          description="Cada experiencia es una relación de confianza con organizaciones que ponen a las personas en el centro."
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "caseStudy",
-  title: "Caso de Éxito",
+  title: "Experiencia",
   type: "document",
   fields: [
     defineField({
@@ -58,7 +58,11 @@ export default defineType({
       title: "Tipo de Servicio",
       type: "string",
       options: {
-        list: ["Keynote", "Taller Corporativo", "Consultoría", "Evento Integral"],
+        list: [
+          "Desarrollo Profesional",
+          "Bienestar Corporativo",
+          "Experiencias de Integración",
+        ],
       },
     }),
     defineField({

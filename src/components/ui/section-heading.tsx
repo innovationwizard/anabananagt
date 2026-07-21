@@ -23,7 +23,7 @@ export function SectionHeading({
         <span
           className={`
             inline-block text-xs font-semibold tracking-[0.2em] uppercase mb-4
-            ${dark ? "text-accent" : "text-accent-hover"}
+            ${dark ? "text-highlight" : "text-accent"}
           `}
         >
           {tag}

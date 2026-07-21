@@ -43,7 +43,7 @@ export function PlaceholderMedia({
         flex items-center justify-center cursor-pointer
         transition-colors duration-300
         ${dark
-          ? "border-border-dark bg-secondary/50 text-text-inverse/40 hover:border-accent/50"
+          ? "border-border-dark bg-secondary/50 text-text-inverse/40 hover:border-highlight/60"
           : "border-border bg-surface-warm text-text-muted/40 hover:border-accent/50"
         }
         ${className}
@@ -76,13 +76,13 @@ export function PlaceholderMedia({
         >
           <button
             onClick={() => setShowTooltip(false)}
-            className="absolute top-3 right-3 text-text-inverse/60 hover:text-accent
+            className="absolute top-3 right-3 text-text-inverse/60 hover:text-highlight
                        transition-colors"
             aria-label="Cerrar instrucciones"
           >
             <X className="w-5 h-5" />
           </button>
-          <span className="text-accent text-xs font-semibold tracking-widest uppercase mb-3">
+          <span className="text-highlight text-xs font-semibold tracking-widest uppercase mb-3">
             Instrucciones de Producción
           </span>
           <p className="text-text-inverse/80 text-sm leading-relaxed whitespace-pre-line">

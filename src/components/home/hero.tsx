@@ -42,19 +42,20 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: STAGGER_DELAY * 0, duration: 0.7 }}
-          className="inline-block text-accent text-xs font-semibold tracking-[0.25em] uppercase mb-6"
+          className="inline-block text-highlight text-xs font-semibold tracking-[0.25em] uppercase mb-6"
         >
-          Keynotes · Facilitación · Entrenamiento Ejecutivo
+          Experiencias corporativas · Desde lo humano
         </motion.span>
 
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: STAGGER_DELAY * 1, duration: 0.8 }}
-          className="font-display text-4xl md:text-5xl lg:text-7xl font-bold text-text-inverse
+          className="font-display text-4xl md:text-5xl lg:text-7xl font-semibold text-text-inverse
                      leading-[1.08] text-balance max-w-4xl mx-auto"
         >
-          Transformamos el talento de su equipo en resultados corporativos medibles.
+          Las empresas crecen cuando{" "}
+          <span className="italic text-highlight">las personas crecen.</span>
         </motion.h1>
 
         <motion.p
@@ -63,8 +64,9 @@ export function Hero() {
           transition={{ delay: STAGGER_DELAY * 2, duration: 0.8 }}
           className="mt-8 text-lg md:text-xl text-text-inverse/60 max-w-2xl mx-auto leading-relaxed"
         >
-          Conferencias, talleres y consultoría estratégica para las empresas
-          más exigentes de la región.
+          Diseñamos experiencias corporativas personalizadas que desarrollan
+          personas, impulsan el bienestar y fortalecen la cultura de su
+          organización.
         </motion.p>
 
         <motion.div
@@ -75,11 +77,11 @@ export function Hero() {
         >
           <Link
             href="/contacto"
-            className="inline-flex items-center px-10 py-4 bg-accent text-primary
+            className="inline-flex items-center px-10 py-4 bg-highlight text-primary
                        text-sm font-semibold tracking-[0.1em] uppercase
-                       hover:bg-accent-hover transition-colors duration-300"
+                       hover:brightness-95 transition-all duration-300"
           >
-            Agendar Consulta Privada
+            Agenda una conversación
           </Link>
         </motion.div>
 
