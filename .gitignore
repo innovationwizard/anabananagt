@@ -40,3 +40,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large brand-manual source files (keep local; host externally or use Git LFS
+# if they need to be versioned — the app only needs public/brand/ab-*.png)
+docs/manual-*.pdf
+docs/manual-*-to-jpg/
+docs/manual-*-to-jpg.zip
+/logos/
