@@ -7,7 +7,6 @@ import Image from "next/image";
 
 const FOOTER_LINKS = [
   { href: "/nosotros", label: "Nosotros" },
-  { href: "/servicios", label: "Servicios" },
   { href: "/portafolio", label: "Portafolio" },
   { href: "/contacto", label: "Contacto" },
 ] as const;
@@ -43,11 +42,11 @@ export function Footer() {
           <div className="max-w-xs">
             <div className="flex items-center gap-3">
               <Image
-                src="/brand/ab-isotipo-on-softblue.png"
+                src="/brand/ab-icono-white.png"
                 alt=""
                 width={36}
                 height={36}
-                className="h-9 w-9 rounded-lg object-cover"
+                className="h-9 w-9 object-contain"
               />
               <span className="font-display text-lg font-semibold">
                 ana banana{" "}
@@ -104,6 +103,14 @@ export function Footer() {
               className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
             >
               WhatsApp
+            </a>
+            <a
+              href="https://www.tiktok.com/@anabanana.gt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
+            >
+              TikTok
             </a>
           </div>
         </div>

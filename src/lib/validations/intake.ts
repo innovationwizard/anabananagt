@@ -41,17 +41,10 @@ export const IntakeSchema = z.object({
   tentativeDate: z.string().optional(),
   eventFormat: z.enum(["presencial", "virtual", "hibrido"]),
 
-  // Step 3 — Scope & Budget
+  // Step 3 — Scope
   eventObjective: z
     .string()
     .min(20, "Describa el objetivo (mínimo 20 caracteres)."),
-  budgetRange: z.enum([
-    "100k-250k",
-    "250k-500k",
-    "500k-1M",
-    "1M+",
-    "prefer-to-discuss",
-  ]),
   referralSource: z.string().optional(),
 
   // Step 4 — Consent
@@ -63,15 +56,6 @@ export const IntakeSchema = z.object({
 });
 
 export type IntakeFormValues = z.infer<typeof IntakeSchema>;
-
-/** Budget labels for display */
-export const BUDGET_LABELS: Record<string, string> = {
-  "100k-250k": "Q100k – Q250k",
-  "250k-500k": "Q250k – Q500k",
-  "500k-1M": "Q500k – Q1M",
-  "1M+": "Q1M+",
-  "prefer-to-discuss": "Prefiero discutirlo en la consulta",
-};
 
 /** Service (pillar) labels for display */
 export const SERVICE_LABELS: Record<string, string> = {

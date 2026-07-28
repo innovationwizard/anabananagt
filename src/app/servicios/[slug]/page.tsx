@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PlaceholderMedia } from "@/components/ui/placeholder-media";
+import { experiencesByPillar, type PillarSlug } from "@/lib/experiences";
 
 // ---------------------------------------------------------------------------
 // /servicios/[slug] — Individual Service Page
@@ -123,6 +124,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   const svc = SERVICES_DATA[slug];
   if (!svc) notFound();
 
+  const experiences = experiencesByPillar(slug as PillarSlug);
+
   return (
     <>
       {/* --- Hero --- */}
@@ -213,6 +216,51 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {/* --- Experiencias de este pilar --- */}
+      {experiences.length > 0 && (
+        <section className="section-padding bg-surface">
+          <div className="container-narrow">
+            <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4">
+              Experiencias
+            </span>
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-primary mb-8">
+              Experiencias de {svc.title}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {experiences.map((e) => (
+                <Link
+                  key={e.slug}
+                  href={`/portafolio/${e.slug}`}
+                  className="group block bg-white border border-border p-6
+                             hover:border-accent/30 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-[10px] font-semibold tracking-[0.15em] uppercase
+                                     text-accent bg-accent/10 px-2 py-0.5">
+                      {e.serviceType}
+                    </span>
+                    <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-text-muted">
+                      {e.industry}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-lg font-semibold text-primary
+                                 group-hover:text-accent transition-colors">
+                    {e.clientAlias}
+                  </h3>
+                  <span className="mt-2 block text-accent font-display text-base font-semibold">
+                    {e.metric}
+                  </span>
+                  <span className="mt-4 inline-block text-xs font-semibold tracking-[0.1em]
+                                   uppercase text-text-muted group-hover:text-accent transition-colors">
+                    Ver experiencia →
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* --- CTA --- */}
       <section className="bg-primary grain-overlay py-16 md:py-20">

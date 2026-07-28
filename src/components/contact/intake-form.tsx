@@ -8,7 +8,6 @@ import { ArrowRight, ArrowLeft, Check, Loader2 } from "lucide-react";
 import {
   IntakeSchema,
   type IntakeFormValues,
-  BUDGET_LABELS,
   SERVICE_LABELS,
 } from "@/lib/validations/intake";
 
@@ -64,7 +63,7 @@ export function IntakeForm() {
   const stepFields: Record<number, (keyof IntakeFormValues)[]> = {
     1: ["companyName", "contactName", "corporateEmail"],
     2: ["serviceType", "participantRange", "eventFormat"],
-    3: ["eventObjective", "budgetRange"],
+    3: ["eventObjective"],
     4: ["privacyConsent"],
   };
 
@@ -268,29 +267,6 @@ export function IntakeForm() {
                   className="form-input resize-none"
                 />
               </Field>
-              <Field label="Rango de inversión estimado" error={errors.budgetRange?.message}>
-                <div className="space-y-2">
-                  {Object.entries(BUDGET_LABELS).map(([val, label]) => (
-                    <label
-                      key={val}
-                      className={`block px-4 py-3 border cursor-pointer text-sm transition-colors
-                        ${
-                          watch("budgetRange") === val
-                            ? "border-accent bg-accent/10 text-accent"
-                            : "border-border hover:border-accent/30"
-                        }`}
-                    >
-                      <input
-                        {...register("budgetRange")}
-                        type="radio"
-                        value={val}
-                        className="sr-only"
-                      />
-                      {label}
-                    </label>
-                  ))}
-                </div>
-              </Field>
               <Field label="¿Cómo nos conoció? (opcional)">
                 <select {...register("referralSource")} className="form-input">
                   <option value="">Seleccione...</option>
@@ -322,10 +298,6 @@ export function IntakeForm() {
                 />
                 <SummaryRow label="Participantes" value={watch("participantRange")} />
                 <SummaryRow label="Formato" value={watch("eventFormat")} />
-                <SummaryRow
-                  label="Inversión"
-                  value={BUDGET_LABELS[watch("budgetRange")] ?? "—"}
-                />
                 <SummaryRow label="Objetivo" value={watch("eventObjective")} />
               </div>
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { IntakeSchema, BUDGET_LABELS, SERVICE_LABELS } from "@/lib/validations/intake";
+import { IntakeSchema, SERVICE_LABELS } from "@/lib/validations/intake";
 
 // ---------------------------------------------------------------------------
 // POST /api/intake — Process B2B lead qualification form
@@ -82,7 +82,6 @@ function buildTeamEmail(data: {
   tentativeDate?: string;
   eventFormat: string;
   eventObjective: string;
-  budgetRange: string;
   referralSource?: string;
 }) {
   return `
@@ -99,7 +98,6 @@ function buildTeamEmail(data: {
         ${row("Participantes", data.participantRange)}
         ${row("Fecha tentativa", data.tentativeDate ?? "No especificada")}
         ${row("Formato", data.eventFormat)}
-        ${row("Inversión", BUDGET_LABELS[data.budgetRange] ?? data.budgetRange)}
         ${row("Referencia", data.referralSource ?? "No especificada")}
       </table>
       <div style="margin-top: 24px; padding: 16px; background: #F6F7F9; border-left: 3px solid #2E46D4;">

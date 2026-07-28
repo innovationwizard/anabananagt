@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PlaceholderMedia } from "@/components/ui/placeholder-media";
+import { PLACEHOLDER_EXPERIENCES } from "@/lib/experiences";
 
 // ---------------------------------------------------------------------------
 // /portafolio — Portfolio Listing Page
@@ -11,38 +12,6 @@ export const metadata: Metadata = {
   description:
     "Experiencias corporativas de desarrollo, bienestar e integración que transformaron equipos y culturas desde lo humano.",
 };
-
-// Placeholder experiences — replaced by Sanity content once populated
-const PLACEHOLDER_CASES = [
-  {
-    slug: "caso-1",
-    clientAlias: "Banco regional",
-    industry: "Banca y Finanzas",
-    serviceType: "Experiencias de Integración",
-    metric: "500+ personas",
-  },
-  {
-    slug: "caso-2",
-    clientAlias: "Compañía industrial",
-    industry: "Manufactura",
-    serviceType: "Bienestar Corporativo",
-    metric: "92% satisfacción",
-  },
-  {
-    slug: "caso-3",
-    clientAlias: "Empresa de telecomunicaciones",
-    industry: "Telecomunicaciones",
-    serviceType: "Desarrollo Profesional",
-    metric: "300+ personas",
-  },
-  {
-    slug: "caso-4",
-    clientAlias: "Firma de servicios profesionales",
-    industry: "Servicios Profesionales",
-    serviceType: "Desarrollo Profesional",
-    metric: "12 semanas",
-  },
-] as const;
 
 export default function PortafolioPage() {
   return (
@@ -66,7 +35,7 @@ export default function PortafolioPage() {
       <section className="section-padding bg-surface">
         <div className="container-narrow">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {PLACEHOLDER_CASES.map(
+            {PLACEHOLDER_EXPERIENCES.map(
               ({ slug, clientAlias, industry, serviceType, metric }) => (
                 <Link
                   key={slug}

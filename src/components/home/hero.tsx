@@ -92,9 +92,13 @@ export function Hero() {
           transition={{ delay: STAGGER_DELAY * 5, duration: 1 }}
           className="mt-20 pt-10 border-t border-text-inverse/10"
         >
-          <span className="text-xs text-text-inverse/30 tracking-[0.15em] uppercase">
-            Confían en nosotros
+          <span className="block text-xs text-text-inverse/40 tracking-[0.18em] uppercase">
+            Marcas que han confiado en nosotros
           </span>
+          <p className="mt-3 text-sm text-text-inverse/50 max-w-2xl mx-auto leading-relaxed">
+            Cada experiencia ha sido diseñada a la medida de las personas, los
+            objetivos y la cultura de cada organización.
+          </p>
           <div className="mt-6 flex items-center justify-center gap-10 md:gap-16 flex-wrap">
             {Array.from({ length: 6 }).map((_, i) => (
               <div

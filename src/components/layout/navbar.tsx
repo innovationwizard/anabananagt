@@ -12,7 +12,6 @@ import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/nosotros", label: "Nosotros" },
-  { href: "/servicios", label: "Servicios" },
   { href: "/portafolio", label: "Portafolio" },
 ] as const;
 
@@ -52,12 +51,12 @@ export function Navbar() {
                        hover:text-highlight transition-colors duration-300"
           >
             <Image
-              src="/brand/ab-isotipo-on-softblue.png"
+              src="/brand/ab-icono-white.png"
               alt=""
               width={40}
               height={40}
               priority
-              className="h-10 w-10 rounded-lg object-cover"
+              className="h-9 w-9 object-contain"
             />
             <span className="font-display text-xl font-semibold tracking-tight">
               ana banana

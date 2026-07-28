@@ -1,6 +1,6 @@
 import { Hero } from "@/components/home/hero";
 import { ServicesOverview } from "@/components/home/services-overview";
-import { StatsStrip } from "@/components/home/stats-strip";
+import { SocialProject } from "@/components/home/social-project";
 import { Testimonials } from "@/components/home/testimonials";
 import { FeaturedCase } from "@/components/home/featured-case";
 
@@ -13,7 +13,7 @@ export default function HomePage() {
     <>
       <Hero />
       <ServicesOverview />
-      <StatsStrip />
+      <SocialProject />
       <FeaturedCase />
       <Testimonials />
     </>
