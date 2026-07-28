@@ -47,3 +47,7 @@ docs/manual-*.pdf
 docs/manual-*-to-jpg/
 docs/manual-*-to-jpg.zip
 /logos/
+
+# client change-request drop (heavy source assets + PDFs; keep local only —
+# see docs-nuevos/MANIFEST.md for the index and change list)
+/docs-nuevos/
