@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { PlaceholderMedia } from "@/components/ui/placeholder-media";
 
@@ -9,6 +10,24 @@ import { PlaceholderMedia } from "@/components/ui/placeholder-media";
 // ---------------------------------------------------------------------------
 
 const STAGGER_DELAY = 0.15;
+
+// Client-provided brand logos ("Marcas que han confiado en nosotros").
+const BRANDS = [
+  { src: "/brands/5b.png", alt: "5B" },
+  { src: "/brands/clarity-law.png", alt: "Clarity Law" },
+  { src: "/brands/rosal.png", alt: "Rosal" },
+  { src: "/brands/pradera-concepcion.png", alt: "Pradera Concepción" },
+  { src: "/brands/spectrum-brands.png", alt: "Spectrum Brands" },
+  { src: "/brands/dorival.png", alt: "Dorival" },
+  { src: "/brands/fundacion-novella.png", alt: "Fundación Carlos F. Novella" },
+  { src: "/brands/intcomex.png", alt: "Intcomex" },
+  { src: "/brands/bayer.png", alt: "Bayer" },
+  { src: "/brands/mariscal.png", alt: "Distribuidora Mariscal" },
+  { src: "/brands/oster.png", alt: "Oster" },
+  { src: "/brands/canesten.png", alt: "Canesten" },
+  { src: "/brands/bantrab.png", alt: "Bantrab" },
+  { src: "/brands/ifx.png", alt: "ifx" },
+] as const;
 
 export function Hero() {
   return (
@@ -99,16 +118,21 @@ export function Hero() {
             Cada experiencia ha sido diseñada a la medida de las personas, los
             objetivos y la cultura de cada organización.
           </p>
-          <div className="mt-6 flex items-center justify-center gap-10 md:gap-16 flex-wrap">
-            {Array.from({ length: 6 }).map((_, i) => (
+          <div className="mt-8 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-3">
+            {BRANDS.map((b) => (
               <div
-                key={i}
-                className="w-24 h-10 rounded bg-text-inverse/5 border border-text-inverse/10
-                           flex items-center justify-center"
+                key={b.alt}
+                className="flex items-center justify-center rounded-lg bg-white px-4 py-3"
               >
-                <span className="text-[10px] text-text-inverse/20 uppercase tracking-wider">
-                  Logo {i + 1}
-                </span>
+                <div className="relative h-9 w-full">
+                  <Image
+                    src={b.src}
+                    alt={b.alt}
+                    fill
+                    sizes="(max-width: 640px) 30vw, (max-width: 768px) 22vw, 130px"
+                    className="object-contain"
+                  />
+                </div>
               </div>
             ))}
           </div>

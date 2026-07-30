@@ -1,238 +1,165 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { PlaceholderMedia } from "@/components/ui/placeholder-media";
+import {
+  EXPERIENCES,
+  PILLAR_LABELS,
+  experienceBySlug,
+} from "@/lib/experiences";
 
 // ---------------------------------------------------------------------------
-// /portafolio/[slug] — Case Study Detail Page
-// Placeholder data — replaced by Sanity once populated.
+// /portafolio/[slug] — Experience detail. Sections per client:
+// Objetivo · Resultados esperados · Contenido/Descripción (+ Temas a trabajar).
 // ---------------------------------------------------------------------------
-
-const CASES_DATA: Record<
-  string,
-  {
-    title: string;
-    clientAlias: string;
-    industry: string;
-    serviceType: string;
-    attendance: number;
-    challenge: string;
-    solution: string;
-    results: string[];
-    testimonial: { quote: string; author: string; role: string };
-  }
-> = {
-  "caso-1": {
-    title: "Kick Off que volvió a unir a un banco regional",
-    clientAlias: "Banco regional",
-    industry: "Banca y Finanzas",
-    serviceType: "Experiencias de Integración",
-    attendance: 500,
-    challenge:
-      "[Placeholder] Describe el desafío del cliente. Ejemplo: tras una fusión regional, 500 personas de distintas culturas necesitaban reconocerse como un solo equipo y recuperar el sentido de pertenencia.",
-    solution:
-      "[Placeholder] Describe la experiencia diseñada. Ejemplo: un kick off de integración de dos días con dinámicas colaborativas, experiencias temáticas y momentos de conexión genuina.",
-    results: [
-      "500+ personas vivieron la experiencia de integración",
-      "94% de satisfacción en la encuesta posterior",
-      "Mejora percibida en pertenencia y confianza entre equipos",
-    ],
-    testimonial: {
-      quote:
-        "[Placeholder] Inserte cita real del cliente. Ejemplo: 'La experiencia de ana banana Experiences volvió a unir a nuestra gente. El cambio en el clima fue inmediato.'",
-      author: "Nombre del líder",
-      role: "Gerencia de Talento",
-    },
-  },
-  "caso-2": {
-    title: "Programa de bienestar para una compañía industrial",
-    clientAlias: "Compañía industrial",
-    industry: "Manufactura",
-    serviceType: "Bienestar Corporativo",
-    attendance: 120,
-    challenge:
-      "[Placeholder] Describe el desafío de bienestar del equipo (energía, clima, equilibrio).",
-    solution:
-      "[Placeholder] Describe la experiencia de bienestar diseñada por ana banana Experiences.",
-    results: [
-      "120 personas participaron en las activaciones de bienestar",
-      "92% de satisfacción posterior",
-      "Personas con más energía y sensación de ser cuidadas",
-    ],
-    testimonial: {
-      quote: "[Placeholder] Cita del sponsor del proyecto.",
-      author: "Nombre del líder",
-      role: "Dirección de RRHH",
-    },
-  },
-  "caso-3": {
-    title: "Experiencia de desarrollo para una convención nacional",
-    clientAlias: "Empresa de telecomunicaciones",
-    industry: "Telecomunicaciones",
-    serviceType: "Desarrollo Profesional",
-    attendance: 300,
-    challenge:
-      "[Placeholder] Describe el contexto de la convención y el objetivo de desarrollo.",
-    solution:
-      "[Placeholder] Describe la experiencia de desarrollo entregada, temas y formato.",
-    results: [
-      "300+ personas participaron en la experiencia",
-      "Evaluada como #1 del evento en la encuesta de salida",
-      "5 solicitudes de experiencias de seguimiento en las 2 semanas posteriores",
-    ],
-    testimonial: {
-      quote: "[Placeholder] Cita del organizador del evento.",
-      author: "Nombre del líder",
-      role: "Dirección de Eventos Corporativos",
-    },
-  },
-  "caso-4": {
-    title: "Desarrollo de marca profesional para líderes",
-    clientAlias: "Firma de servicios profesionales",
-    industry: "Servicios Profesionales",
-    serviceType: "Desarrollo Profesional",
-    attendance: 8,
-    challenge:
-      "[Placeholder] Describe el desafío de desarrollo y posicionamiento del equipo directivo.",
-    solution:
-      "[Placeholder] Describe la experiencia de desarrollo: diagnóstico, diseño y acompañamiento.",
-    results: [
-      "8 líderes completaron el programa de 12 semanas",
-      "Presencia profesional de los participantes fortalecida",
-      "3 invitaciones a paneles de industria generadas para el equipo",
-    ],
-    testimonial: {
-      quote: "[Placeholder] Cita del sponsor del programa.",
-      author: "Nombre del líder",
-      role: "Dirección General",
-    },
-  },
-};
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
-  return Object.keys(CASES_DATA).map((slug) => ({ slug }));
+export function generateStaticParams() {
+  return EXPERIENCES.map((e) => ({ slug: e.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const c = CASES_DATA[slug];
-  if (!c) return {};
+  const exp = experienceBySlug(slug);
+  if (!exp) return {};
   return {
-    title: c.title,
-    description: `${c.clientAlias} — ${c.serviceType}. ${c.results[0]}`,
+    title: exp.title,
+    description: exp.objetivo.slice(0, 160),
   };
 }
 
-export default async function CaseStudyPage({ params }: PageProps) {
+export default async function ExperiencePage({ params }: PageProps) {
   const { slug } = await params;
-  const c = CASES_DATA[slug];
-  if (!c) notFound();
+  const exp = experienceBySlug(slug);
+  if (!exp) notFound();
 
   return (
     <>
-      {/* --- Hero --- */}
-      <section className="relative min-h-[60vh] flex items-end overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <PlaceholderMedia
-            variant="photo"
-            aspectRatio="auto"
-            className="!rounded-none !border-0 w-full h-full"
-            dark
-            label="Fotografía del Evento"
-            instructions={`FOTOGRAFÍA CASO: ${c.clientAlias}
-• Wide shot panorámico del evento/sesión
-• Mostrar escala: audiencia de ${c.attendance}+ personas
-• Alto contraste, ligeramente desaturado
-• Mínimo 3000px de ancho, JPEG calidad 90+`}
+      {/* --- Cover --- */}
+      <section className="pt-20 bg-primary">
+        <div className="relative w-full aspect-video max-h-[70vh] overflow-hidden">
+          <Image
+            src={exp.cover}
+            alt={exp.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/40" />
         </div>
+      </section>
 
-        <div className="relative z-10 container-narrow py-16 md:py-24">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
+      {/* --- Header --- */}
+      <section className="bg-primary grain-overlay pb-14 pt-12">
+        <div className="container-narrow">
+          <Link
+            href="/portafolio"
+            className="text-xs text-text-inverse/50 hover:text-highlight tracking-[0.1em] uppercase transition-colors"
+          >
+            ← Experiencias
+          </Link>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
             <span className="px-3 py-1 text-[10px] font-semibold tracking-[0.15em] uppercase
                              bg-highlight/20 text-highlight">
-              {c.serviceType}
+              {PILLAR_LABELS[exp.pillar]}
             </span>
-            <span className="text-xs text-text-inverse/40">{c.industry}</span>
           </div>
-          <h1 className="font-display text-3xl md:text-5xl font-semibold text-text-inverse leading-tight max-w-3xl">
-            {c.title}
+          <h1 className="mt-4 font-display text-3xl md:text-5xl font-semibold text-text-inverse leading-tight">
+            {exp.title}
           </h1>
-          <div className="flex items-center gap-6 mt-6">
-            <div>
-              <span className="block text-highlight font-display text-3xl font-semibold">
-                {c.attendance}+
+          <div className="mt-6 flex flex-wrap gap-x-10 gap-y-2 text-sm text-text-inverse/60">
+            <span>
+              <span className="text-text-inverse/40 uppercase tracking-[0.1em] text-xs mr-2">
+                Duración
               </span>
-              <span className="text-xs text-text-inverse/40 uppercase tracking-wider">
-                Personas
+              {exp.duracion}
+            </span>
+            <span>
+              <span className="text-text-inverse/40 uppercase tracking-[0.1em] text-xs mr-2">
+                Modalidad
               </span>
-            </div>
+              {exp.modalidad}
+            </span>
           </div>
         </div>
       </section>
 
-      {/* --- Challenge / Solution --- */}
+      {/* --- Objetivo --- */}
       <section className="section-padding bg-surface">
         <div className="container-narrow max-w-3xl">
-          <div className="space-y-12">
-            <div>
-              <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-                El Desafío
-              </span>
-              <p className="text-primary leading-relaxed">{c.challenge}</p>
-            </div>
-            <div>
-              <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-                La Solución
-              </span>
-              <p className="text-primary leading-relaxed">{c.solution}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- Results --- */}
-      <section className="section-padding bg-primary grain-overlay">
-        <div className="container-narrow max-w-3xl">
-          <span className="inline-block text-highlight text-xs font-semibold tracking-[0.2em] uppercase mb-8">
-            Resultados
+          <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4">
+            Objetivo
           </span>
-          <div className="space-y-6">
-            {c.results.map((r, i) => (
-              <div
-                key={i}
-                className="flex gap-4 items-start text-text-inverse/80"
-              >
-                <span className="shrink-0 w-8 h-8 flex items-center justify-center
-                                 bg-highlight/10 text-highlight text-sm font-bold">
-                  {i + 1}
-                </span>
-                <span className="text-lg leading-relaxed">{r}</span>
-              </div>
-            ))}
-          </div>
+          <p className="text-lg text-primary leading-relaxed">{exp.objetivo}</p>
         </div>
       </section>
 
-      {/* --- Testimonial --- */}
+      {/* --- Resultados esperados --- */}
+      <section className="section-padding bg-white">
+        <div className="container-narrow max-w-3xl">
+          <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-6">
+            Resultados esperados
+          </span>
+          <ul className="space-y-4">
+            {exp.resultados.map((r, i) => (
+              <li
+                key={i}
+                className="flex gap-4 text-text-muted leading-relaxed"
+              >
+                <span className="mt-2 shrink-0 w-1.5 h-1.5 rounded-full bg-accent" />
+                {r}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* --- Contenido / Descripción --- */}
       <section className="section-padding bg-surface">
-        <div className="container-narrow max-w-2xl text-center">
-          <p className="font-display text-xl md:text-2xl text-primary italic leading-relaxed">
-            &ldquo;{c.testimonial.quote}&rdquo;
-          </p>
-          <div className="mt-6">
-            <span className="block font-semibold text-primary">
-              {c.testimonial.author}
-            </span>
-            <span className="text-sm text-text-muted">
-              {c.testimonial.role}, {c.clientAlias}
-            </span>
-          </div>
+        <div className="container-narrow max-w-3xl">
+          <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-6">
+            Contenido / Descripción
+          </span>
+          {exp.contenido && (
+            <p className="text-primary leading-relaxed">{exp.contenido}</p>
+          )}
+          {exp.contenidoItems && (
+            <div className={`space-y-4 ${exp.contenido ? "mt-6" : ""}`}>
+              {exp.contenidoItems.map((item, i) => (
+                <div
+                  key={i}
+                  className="flex gap-4 text-sm text-text-muted leading-relaxed"
+                >
+                  <span className="shrink-0 w-6 h-6 flex items-center justify-center
+                                   bg-accent/10 text-accent text-xs font-bold">
+                    {i + 1}
+                  </span>
+                  {item}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {exp.temas && (
+            <div className="mt-10">
+              {exp.temasIntro && (
+                <p className="text-primary leading-relaxed mb-4">{exp.temasIntro}</p>
+              )}
+              <ul className="space-y-3">
+                {exp.temas.map((t, i) => (
+                  <li
+                    key={i}
+                    className="pl-4 border-l-2 border-accent/30 text-sm text-text-muted leading-relaxed"
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </section>
 
@@ -241,10 +168,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
         <div className="container-narrow flex flex-col md:flex-row items-center justify-between gap-8">
           <div>
             <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-inverse">
-              ¿Busca una experiencia como esta?
+              ¿Quiere vivir esta experiencia con su equipo?
             </h2>
             <p className="mt-2 text-text-inverse/50">
-              Cada experiencia inicia con una conversación.
+              Cada experiencia se adapta a la realidad de su organización.
             </p>
           </div>
           <Link

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PlaceholderMedia } from "@/components/ui/placeholder-media";
 import { experiencesByPillar, type PillarSlug } from "@/lib/experiences";
@@ -19,9 +20,11 @@ const SERVICES_DATA: Record<
     deliverables: string[];
     outcomes: string[];
     photoInstructions: string;
+    image?: string;
   }
 > = {
   "desarrollo-profesional": {
+    image: "/pillars/desarrollo-profesional.jpg",
     title: "Desarrollo Profesional",
     tagline: "Crecer. Liderar. Comunicar.",
     description:
@@ -151,13 +154,26 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 Diseñemos esta experiencia
               </Link>
             </div>
-            <PlaceholderMedia
-              variant="photo"
-              aspectRatio="4/3"
-              dark
-              label={svc.title}
-              instructions={svc.photoInstructions}
-            />
+            {svc.image ? (
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={svc.image}
+                  alt={svc.title}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <PlaceholderMedia
+                variant="photo"
+                aspectRatio="4/3"
+                dark
+                label={svc.title}
+                instructions={svc.photoInstructions}
+              />
+            )}
           </div>
         </div>
       </section>
@@ -232,29 +248,28 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 <Link
                   key={e.slug}
                   href={`/portafolio/${e.slug}`}
-                  className="group block bg-white border border-border p-6
+                  className="group block bg-white border border-border overflow-hidden
                              hover:border-accent/30 hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-[10px] font-semibold tracking-[0.15em] uppercase
-                                     text-accent bg-accent/10 px-2 py-0.5">
-                      {e.serviceType}
-                    </span>
-                    <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-text-muted">
-                      {e.industry}
+                  <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
+                    <Image
+                      src={e.cover}
+                      alt={e.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-display text-lg font-semibold text-primary
+                                   group-hover:text-accent transition-colors">
+                      {e.title}
+                    </h3>
+                    <span className="mt-3 inline-block text-xs font-semibold tracking-[0.1em]
+                                     uppercase text-text-muted group-hover:text-accent transition-colors">
+                      Ver experiencia →
                     </span>
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-primary
-                                 group-hover:text-accent transition-colors">
-                    {e.clientAlias}
-                  </h3>
-                  <span className="mt-2 block text-accent font-display text-base font-semibold">
-                    {e.metric}
-                  </span>
-                  <span className="mt-4 inline-block text-xs font-semibold tracking-[0.1em]
-                                   uppercase text-text-muted group-hover:text-accent transition-colors">
-                    Ver experiencia →
-                  </span>
                 </Link>
               ))}
             </div>

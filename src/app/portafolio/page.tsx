@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PlaceholderMedia } from "@/components/ui/placeholder-media";
-import { PLACEHOLDER_EXPERIENCES } from "@/lib/experiences";
+import Image from "next/image";
+import { EXPERIENCES, PILLAR_LABELS } from "@/lib/experiences";
 
 // ---------------------------------------------------------------------------
-// /portafolio — Portfolio Listing Page
+// /portafolio — Experiences listing
 // ---------------------------------------------------------------------------
 
 export const metadata: Metadata = {
   title: "Experiencias",
   description:
-    "Experiencias corporativas de desarrollo, bienestar e integración que transformaron equipos y culturas desde lo humano.",
+    "Experiencias corporativas de desarrollo, bienestar e integración que transforman equipos y culturas desde lo humano.",
 };
 
 export default function PortafolioPage() {
@@ -31,65 +31,49 @@ export default function PortafolioPage() {
         </div>
       </section>
 
-      {/* --- Case Study Grid --- */}
+      {/* --- Experiences Grid --- */}
       <section className="section-padding bg-surface">
         <div className="container-narrow">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {PLACEHOLDER_EXPERIENCES.map(
-              ({ slug, clientAlias, industry, serviceType, metric }) => (
-                <Link
-                  key={slug}
-                  href={`/portafolio/${slug}`}
-                  className="group block bg-white border border-border
-                             hover:border-accent/30 hover:shadow-lg
-                             transition-all duration-500 overflow-hidden"
-                >
-                  {/* Image */}
-                  <PlaceholderMedia
-                    variant="photo"
-                    aspectRatio="16/10"
-                    dark={false}
-                    label={clientAlias}
-                    className="!rounded-none !border-0 !border-b border-border"
-                    instructions={`FOTOGRAFÍA EXPERIENCIA: ${clientAlias}
-• Imagen principal del evento o sesión
-• Wide shot que muestre escala y producción
-• Alto contraste, ligeramente desaturado
-• Mínimo 3000px de ancho`}
+            {EXPERIENCES.map((exp) => (
+              <Link
+                key={exp.slug}
+                href={`/portafolio/${exp.slug}`}
+                className="group block bg-white border border-border
+                           hover:border-accent/30 hover:shadow-lg
+                           transition-all duration-500 overflow-hidden"
+              >
+                {/* Cover */}
+                <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
+                  <Image
+                    src={exp.cover}
+                    alt={exp.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   />
+                </div>
 
-                  {/* Content */}
-                  <div className="p-6 md:p-8">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-[10px] font-semibold tracking-[0.15em] uppercase
-                                       text-accent bg-accent/10 px-2 py-0.5">
-                        {serviceType}
-                      </span>
-                      <span className="text-[10px] font-semibold tracking-[0.1em] uppercase text-text-muted">
-                        {industry}
-                      </span>
-                    </div>
+                {/* Content */}
+                <div className="p-6 md:p-8">
+                  <span className="text-[10px] font-semibold tracking-[0.15em] uppercase
+                                   text-accent bg-accent/10 px-2 py-0.5">
+                    {PILLAR_LABELS[exp.pillar]}
+                  </span>
 
-                    <h3 className="font-display text-xl font-bold text-primary
-                                   group-hover:text-accent transition-colors duration-300">
-                      {clientAlias}
-                    </h3>
+                  <h3 className="mt-4 font-display text-xl font-semibold text-primary
+                                 group-hover:text-accent transition-colors duration-300">
+                    {exp.title}
+                  </h3>
 
-                    <div className="mt-4 flex items-center gap-2">
-                      <span className="text-accent font-display text-lg font-bold">
-                        {metric}
-                      </span>
-                    </div>
-
-                    <span className="inline-block mt-4 text-xs font-semibold tracking-[0.1em]
-                                     uppercase text-text-muted group-hover:text-accent
-                                     transition-colors duration-300">
-                      Ver experiencia →
-                    </span>
-                  </div>
-                </Link>
-              ),
-            )}
+                  <span className="inline-block mt-4 text-xs font-semibold tracking-[0.1em]
+                                   uppercase text-text-muted group-hover:text-accent
+                                   transition-colors duration-300">
+                    Ver experiencia →
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

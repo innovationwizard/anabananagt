@@ -40,22 +40,14 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-start justify-between gap-10">
           {/* Brand */}
           <div className="max-w-xs">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/brand/ab-icono-white.png"
-                alt=""
-                width={36}
-                height={36}
-                className="h-9 w-9 object-contain"
-              />
-              <span className="font-display text-lg font-semibold">
-                ana banana{" "}
-                <span className="text-text-inverse/50 text-sm tracking-[0.2em] uppercase">
-                  Experiences
-                </span>
-              </span>
-            </div>
-            <p className="mt-3 text-sm text-text-inverse/50 leading-relaxed">
+            <Image
+              src="/brand/ab-lockup-white.png"
+              alt="ana banana Experiences"
+              width={1430}
+              height={445}
+              className="h-11 w-auto"
+            />
+            <p className="mt-4 text-sm text-text-inverse/50 leading-relaxed">
               Experiencias corporativas que desarrollan personas, impulsan el
               bienestar y fortalecen la cultura de cada organización.
             </p>

@@ -47,20 +47,16 @@ export function Navbar() {
           <Link
             href="/"
             aria-label="ana banana Experiences — inicio"
-            className="group flex items-center gap-3 text-text-inverse
-                       hover:text-highlight transition-colors duration-300"
+            className="flex items-center transition-opacity duration-300 hover:opacity-80"
           >
             <Image
-              src="/brand/ab-icono-white.png"
-              alt=""
-              width={40}
-              height={40}
+              src="/brand/ab-lockup-white.png"
+              alt="ana banana Experiences"
+              width={1430}
+              height={445}
               priority
-              className="h-9 w-9 object-contain"
+              className="h-10 w-auto"
             />
-            <span className="font-display text-xl font-semibold tracking-tight">
-              ana banana
-            </span>
           </Link>
 
           {/* --- Desktop Links --- */}
