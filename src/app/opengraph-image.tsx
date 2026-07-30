@@ -4,7 +4,7 @@ import { join } from "node:path";
 
 // ---------------------------------------------------------------------------
 // Open Graph / social share card — generated at build time (1200×630).
-// Brand lockup + essence line on Deep Navy (brand manual Ch.05).
+// "ab." isotipo (left part of the logo only) + essence line on Deep Navy.
 // ---------------------------------------------------------------------------
 
 export const alt =
@@ -13,9 +13,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
-  // Cream-on-navy full lockup (baked navy bg matches the card background).
+  // White "ab." isotipo (transparent) — the navy card supplies the background.
   const logo = await readFile(
-    join(process.cwd(), "public/brand/ab-lockup-on-navy.png"),
+    join(process.cwd(), "public/brand/ab-icono-white.png"),
     "base64",
   );
   const logoSrc = `data:image/png;base64,${logo}`;
@@ -30,20 +30,19 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 8,
+          gap: 44,
           padding: "72px 96px",
           background: "#243054",
         }}
       >
-        <img src={logoSrc} alt="" width={560} height={560} style={{ marginTop: -80 }} />
+        <img src={logoSrc} alt="" width={300} height={257} />
         <div
           style={{
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
             gap: 12,
-            marginTop: -40,
-            fontSize: 40,
+            fontSize: 44,
             color: "#F4F2EA",
             lineHeight: 1.3,
           }}
