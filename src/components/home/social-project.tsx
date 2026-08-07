@@ -1,15 +1,23 @@
+import Image from "next/image";
 import { PlaceholderMedia } from "@/components/ui/placeholder-media";
 
 // ---------------------------------------------------------------------------
 // SocialProject — "Sembrando futuro" (Proyecto Estrella).
-// Client request (CHANGES-REQUESTED.pdf p.7): present the social-aid initiative
-// in a small section where the stats strip used to be. Copy is verbatim from the
-// client. The two photos are pending — placeholders until provided.
+// Contenido desde el CMS (global Inicio → Compromiso social). Mientras las dos
+// fotos no estén cargadas, se muestran marcadores de posición con las
+// especificaciones para el cliente.
 // ---------------------------------------------------------------------------
 
-const PHOTOS = ["Proyecto Estrella — 1", "Proyecto Estrella — 2"] as const;
+const PLACEHOLDER_LABELS = ["Proyecto Estrella — 1", "Proyecto Estrella — 2"] as const;
 
-export function SocialProject() {
+type SocialProjectProps = {
+  tag: string;
+  titulo: string;
+  texto: string;
+  fotos: ReadonlyArray<{ url: string; alt: string }>;
+};
+
+export function SocialProject({ tag, titulo, texto, fotos }: SocialProjectProps) {
   return (
     <section className="section-padding bg-surface">
       <div className="container-narrow">
@@ -17,35 +25,43 @@ export function SocialProject() {
           {/* Text */}
           <div>
             <span className="inline-block text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4">
-              Compromiso social
+              {tag}
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-semibold text-primary leading-tight">
-              Sembrando futuro
+              {titulo}
             </h2>
-            <p className="mt-6 text-text-muted leading-relaxed">
-              En Anabanana también dedicamos parte de nuestro trabajo a inspirar a
-              las nuevas generaciones. Por eso impulsamos Proyecto Estrella, una
-              iniciativa con la que llevamos experiencias de aprendizaje a niños y
-              jóvenes para inspirarlos a descubrir su potencial.
-            </p>
+            <p className="mt-6 text-text-muted leading-relaxed">{texto}</p>
           </div>
 
-          {/* Photos (2) — pending from client */}
+          {/* Photos (2) */}
           <div className="grid grid-cols-2 gap-4">
-            {PHOTOS.map((label) => (
-              <PlaceholderMedia
-                key={label}
-                variant="photo"
-                aspectRatio="3/4"
-                dark={false}
-                label={label}
-                instructions={`FOTO PROYECTO ESTRELLA — ${label}
+            {PLACEHOLDER_LABELS.map((label, i) => {
+              const foto = fotos[i];
+              return foto ? (
+                <div key={label} className="relative aspect-[3/4] overflow-hidden">
+                  <Image
+                    src={foto.url}
+                    alt={foto.alt}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <PlaceholderMedia
+                  key={label}
+                  variant="photo"
+                  aspectRatio="3/4"
+                  dark={false}
+                  label={label}
+                  instructions={`FOTO PROYECTO ESTRELLA — ${label}
 • Niños y jóvenes en una experiencia de aprendizaje de Proyecto Estrella
 • Momento genuino: descubrimiento, alegría, participación
 • Luz natural y cálida; sin poses forzadas
 • Mínimo 2000px de ancho, JPEG calidad 90+`}
-              />
-            ))}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

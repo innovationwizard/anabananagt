@@ -6,20 +6,29 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "payload": "payload",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap",
+    "seed": "node --env-file=.env --import tsx scripts/seed.ts",
+    "ci": "DATABASE_URL=${DIRECT_URL:-$DATABASE_URL} payload migrate && next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
-    "@sanity/client": "^7.22.1",
-    "@sanity/image-url": "^2.1.1",
+    "@payloadcms/db-postgres": "^3.87.1",
+    "@payloadcms/live-preview-react": "^3.87.1",
+    "@payloadcms/next": "^3.87.1",
+    "@payloadcms/richtext-lexical": "^3.87.1",
+    "@payloadcms/storage-s3": "^3.87.1",
     "framer-motion": "^12.40.0",
+    "graphql": "^16.14.2",
     "lucide-react": "^1.17.0",
     "next": "16.2.7",
-    "next-sanity": "^13.0.11",
+    "payload": "^3.87.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.77.0",
-    "sanity": "^5.30.0",
+    "sharp": "^0.35.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -31,5 +40,6 @@
     "eslint-config-next": "16.2.7",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "type": "module"
 }

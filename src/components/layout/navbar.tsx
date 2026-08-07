@@ -7,15 +7,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 // ---------------------------------------------------------------------------
-// Navbar — Transparent → solid on scroll, full-screen mobile overlay
+// Navbar — Transparent → solid on scroll, full-screen mobile overlay.
+// Enlaces y etiqueta del CTA vienen del CMS (Ajustes del sitio → Navegación).
 // ---------------------------------------------------------------------------
 
-const NAV_LINKS = [
-  { href: "/nosotros", label: "Nosotros" },
-  { href: "/portafolio", label: "Portafolio" },
-] as const;
+type NavbarProps = {
+  links: ReadonlyArray<{ href: string; label: string }>;
+  ctaLabel: string;
+};
 
-export function Navbar() {
+export function Navbar({ links, ctaLabel }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -61,7 +62,7 @@ export function Navbar() {
 
           {/* --- Desktop Links --- */}
           <div className="hidden md:flex items-center gap-10">
-            {NAV_LINKS.map(({ href, label }) => (
+            {links.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
@@ -82,7 +83,7 @@ export function Navbar() {
                          tracking-[0.06em] uppercase rounded-none
                          hover:brightness-95 transition-all duration-300"
             >
-              Conversemos
+              {ctaLabel}
             </Link>
 
             <button
@@ -107,7 +108,7 @@ export function Navbar() {
             className="fixed inset-0 z-40 bg-primary flex flex-col items-center
                        justify-center gap-10"
           >
-            {NAV_LINKS.map(({ href, label }, i) => (
+            {links.map(({ href, label }, i) => (
               <motion.div
                 key={href}
                 initial={{ opacity: 0, y: 20 }}
@@ -136,7 +137,7 @@ export function Navbar() {
                            text-sm font-semibold tracking-[0.08em] uppercase
                            hover:brightness-95 transition-all"
               >
-                Conversemos
+                {ctaLabel}
               </Link>
             </motion.div>
           </motion.div>

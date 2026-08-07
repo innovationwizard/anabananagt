@@ -51,3 +51,6 @@ docs/manual-*-to-jpg.zip
 # client change-request drop (heavy source assets + PDFs; keep local only —
 # see docs-nuevos/MANIFEST.md for the index and change list)
 /docs-nuevos/
+
+# Payload local-disk uploads (solo dev; producción usa Supabase Storage)
+/media

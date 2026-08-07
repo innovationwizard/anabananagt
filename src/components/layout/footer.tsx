@@ -1,18 +1,26 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { SiteSetting } from "@/payload-types";
 
 // ---------------------------------------------------------------------------
-// Footer — Minimal corporate footer with CTA repeat
+// Footer — Minimal corporate footer with CTA repeat.
+// Todo el contenido viene del CMS (Ajustes del sitio).
 // ---------------------------------------------------------------------------
 
-const FOOTER_LINKS = [
-  { href: "/nosotros", label: "Nosotros" },
-  { href: "/portafolio", label: "Portafolio" },
-  { href: "/contacto", label: "Contacto" },
-] as const;
+type FooterProps = {
+  settings: SiteSetting;
+};
 
-export function Footer() {
+export function Footer({ settings }: FooterProps) {
   const year = new Date().getFullYear();
+  const { footer, redes, contacto } = settings;
+
+  const socials: Array<{ label: string; url: string }> = [
+    ...(redes?.linkedin ? [{ label: "LinkedIn", url: redes.linkedin }] : []),
+    ...(redes?.instagram ? [{ label: "Instagram", url: redes.instagram }] : []),
+    { label: "WhatsApp", url: `https://wa.me/${contacto.whatsapp}` },
+    ...(redes?.tiktok ? [{ label: "TikTok", url: redes.tiktok }] : []),
+  ];
 
   return (
     <footer className="bg-primary text-text-inverse">
@@ -21,8 +29,8 @@ export function Footer() {
         <div className="container-narrow flex flex-col md:flex-row items-center
                         justify-between gap-6 py-12 md:py-16">
           <h3 className="font-display text-2xl md:text-3xl font-semibold text-center md:text-left">
-            Transformemos su organización{" "}
-            <span className="italic text-highlight">desde lo humano.</span>
+            {footer.ctaTitulo}{" "}
+            <span className="italic text-highlight">{footer.ctaTituloDestacado}</span>
           </h3>
           <Link
             href="/contacto"
@@ -30,7 +38,7 @@ export function Footer() {
                        text-sm font-semibold tracking-[0.08em] uppercase
                        hover:brightness-95 transition-all duration-300 shrink-0"
           >
-            Conversemos
+            {footer.ctaEtiqueta}
           </Link>
         </div>
       </div>
@@ -48,21 +56,20 @@ export function Footer() {
               className="h-11 w-auto"
             />
             <p className="mt-4 text-sm text-text-inverse/50 leading-relaxed">
-              Experiencias corporativas que desarrollan personas, impulsan el
-              bienestar y fortalecen la cultura de cada organización.
+              {footer.blurb}
             </p>
           </div>
 
           {/* Nav */}
           <nav className="flex gap-8">
-            {FOOTER_LINKS.map(({ href, label }) => (
+            {footer.enlaces.map(({ etiqueta, destino }) => (
               <Link
-                key={href}
-                href={href}
+                key={destino}
+                href={destino}
                 className="text-sm text-text-inverse/50 hover:text-highlight
                            transition-colors duration-300"
               >
-                {label}
+                {etiqueta}
               </Link>
             ))}
           </nav>
@@ -72,38 +79,17 @@ export function Footer() {
             <span className="text-xs font-semibold tracking-[0.15em] uppercase text-text-inverse/30 mb-1">
               Conectar
             </span>
-            <a
-              href="https://www.linkedin.com/company/grupoanabanana/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://www.instagram.com/anabanana.gt/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://wa.me/50250320841"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
-            >
-              WhatsApp
-            </a>
-            <a
-              href="https://www.tiktok.com/@anabanana.gt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
-            >
-              TikTok
-            </a>
+            {socials.map(({ label, url }) => (
+              <a
+                key={label}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-text-inverse/50 hover:text-highlight transition-colors"
+              >
+                {label}
+              </a>
+            ))}
           </div>
         </div>
 
@@ -111,10 +97,10 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-border-dark
                         flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="text-xs text-text-inverse/30">
-            © {year} ana banana Experiences · Grupo anabanana, S.A. Todos los derechos reservados.
+            © {year} ana banana Experiences · {footer.entidad} Todos los derechos reservados.
           </span>
           <span className="text-xs text-text-inverse/30">
-            Guatemala City, Guatemala
+            {footer.ubicacion}
           </span>
         </div>
       </div>
