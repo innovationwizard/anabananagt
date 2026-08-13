@@ -80,6 +80,12 @@ export default buildConfig({
     meta: {
       titleSuffix: " — ana banana · Estudio de contenido",
     },
+    components: {
+      graphics: {
+        Logo: "./src/components/admin/logo#Logo",
+        Icon: "./src/components/admin/icon#Icon",
+      },
+    },
     // Vista previa en vivo: el sitio real dentro del panel, con borradores,
     // en tres tamaños de pantalla.
     livePreview: {
