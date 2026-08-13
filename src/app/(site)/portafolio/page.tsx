@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getExperiences, getPortfolioPage } from "@/lib/content";
 import { mediaAlt, mediaUrl } from "@/lib/content/media";
+import { pageMetadata } from "@/lib/content/seo";
 import { pillarLabel } from "@/lib/content/labels";
 
 // ---------------------------------------------------------------------------
@@ -11,10 +12,11 @@ import { pillarLabel } from "@/lib/content/labels";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPortfolioPage();
-  return {
-    title: page.seo?.metaTitulo ?? page.header.titulo,
-    description: page.seo?.metaDescripcion ?? page.header.texto,
-  };
+  return pageMetadata({
+    titulo: page.header.titulo,
+    descripcion: page.header.texto,
+    seo: page.seo,
+  });
 }
 
 export default async function PortafolioPage() {

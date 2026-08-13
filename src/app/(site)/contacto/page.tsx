@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IntakeForm } from "@/components/contact/intake-form";
 import { getContactPage, getSiteSettings } from "@/lib/content";
+import { pageMetadata } from "@/lib/content/seo";
 
 // ---------------------------------------------------------------------------
 // /contacto — Contact / Intake Page (textos desde el CMS; el formulario es
@@ -9,10 +10,7 @@ import { getContactPage, getSiteSettings } from "@/lib/content";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getContactPage();
-  return {
-    title: page.seo?.metaTitulo ?? "Contacto",
-    description: page.seo?.metaDescripcion ?? undefined,
-  };
+  return pageMetadata({ titulo: "Contacto", seo: page.seo });
 }
 
 export default async function ContactoPage() {

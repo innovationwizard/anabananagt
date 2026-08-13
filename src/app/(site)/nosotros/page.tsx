@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { iconFor } from "@/components/ui/icons";
 import { getAboutPage } from "@/lib/content";
 import { mediaAlt, mediaUrl } from "@/lib/content/media";
+import { pageMetadata } from "@/lib/content/seo";
 
 // ---------------------------------------------------------------------------
 // /nosotros — About: the Ana Banana Experiences brand (manual Ch.01–02, 04).
@@ -14,10 +15,7 @@ import { mediaAlt, mediaUrl } from "@/lib/content/media";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getAboutPage();
-  return {
-    title: page.seo?.metaTitulo ?? "Nosotros",
-    description: page.seo?.metaDescripcion ?? undefined,
-  };
+  return pageMetadata({ titulo: "Nosotros", seo: page.seo });
 }
 
 export default async function NosotrosPage() {

@@ -79,6 +79,18 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: " — ana banana · Estudio de contenido",
+      description:
+        "Panel de administración de contenido del sitio anabanana.gt — ana banana Experiences.",
+      icons: [{ url: "/icon.png" }],
+      openGraph: {
+        title: "ana banana · Estudio de contenido",
+        description:
+          "Panel de administración de contenido del sitio anabanana.gt.",
+        siteName: "ana banana Experiences",
+        // Tarjeta de marca del sitio en URL estable (relativa: resuelve contra
+        // el host real, que hoy difiere de NEXT_PUBLIC_SERVER_URL).
+        images: [{ url: "/og-card", width: 1200, height: 630 }],
+      },
     },
     components: {
       graphics: {

@@ -8,6 +8,7 @@ import {
   getPortfolioPage,
 } from "@/lib/content";
 import { mediaAlt, mediaUrl } from "@/lib/content/media";
+import { pageMetadata } from "@/lib/content/seo";
 import { pillarLabel } from "@/lib/content/labels";
 
 // ---------------------------------------------------------------------------
@@ -29,10 +30,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const exp = await getExperienceBySlug(slug);
   if (!exp) return {};
-  return {
-    title: exp.seo?.metaTitulo ?? exp.title,
-    description: exp.seo?.metaDescripcion ?? exp.objetivo.slice(0, 160),
-  };
+  return pageMetadata({
+    titulo: exp.title,
+    descripcion: exp.objetivo.slice(0, 160),
+    seo: exp.seo,
+  });
 }
 
 export default async function ExperiencePage({ params }: PageProps) {

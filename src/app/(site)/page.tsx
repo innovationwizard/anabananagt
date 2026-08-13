@@ -10,12 +10,36 @@ import {
   getHomePage,
   getServices,
 } from "@/lib/content";
+import type { Metadata } from "next";
 import { mediaAlt, mediaDoc, mediaUrl } from "@/lib/content/media";
 
 // ---------------------------------------------------------------------------
 // Home Page — Server Component: obtiene todo el contenido del CMS y lo pasa
 // como props a las secciones (client components donde hay animación).
 // ---------------------------------------------------------------------------
+
+// El inicio hereda título/descripción/OG del layout (Ajustes del sitio);
+// la pestaña SEO del global Inicio solo SOBREESCRIBE lo que el editor defina.
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getHomePage();
+  const seo = page.seo;
+  const og = mediaDoc(seo?.ogImagen);
+  const ogUrl = og?.sizes?.og?.url ?? og?.url;
+  return {
+    ...(seo?.metaTitulo ? { title: { absolute: seo.metaTitulo } } : {}),
+    ...(seo?.metaDescripcion ? { description: seo.metaDescripcion } : {}),
+    ...(ogUrl
+      ? {
+          openGraph: {
+            type: "website",
+            locale: "es_GT",
+            siteName: "ana banana Experiences",
+            images: [{ url: ogUrl, width: 1200, height: 630 }],
+          },
+        }
+      : {}),
+  };
+}
 
 export default async function HomePage() {
   const [page, services, logos, testimonials, featured] = await Promise.all([

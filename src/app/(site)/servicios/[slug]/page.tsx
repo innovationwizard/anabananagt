@@ -9,6 +9,7 @@ import {
   getServiceSlugs,
 } from "@/lib/content";
 import { mediaAlt, mediaUrl } from "@/lib/content/media";
+import { pageMetadata } from "@/lib/content/seo";
 
 // ---------------------------------------------------------------------------
 // /servicios/[slug] — Individual Service Page (contenido desde el CMS)
@@ -50,10 +51,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const svc = await getServiceBySlug(slug);
   if (!svc) return {};
-  return {
-    title: svc.seo?.metaTitulo ?? svc.title,
-    description: svc.seo?.metaDescripcion ?? svc.description.slice(0, 160),
-  };
+  return pageMetadata({
+    titulo: svc.title,
+    descripcion: svc.description.slice(0, 160),
+    seo: svc.seo,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
