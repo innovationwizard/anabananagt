@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "payload": "payload",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "seed": "node --env-file=.env --import tsx scripts/seed.ts",
-    "ci": "DATABASE_URL=${DIRECT_URL:-$DATABASE_URL} payload migrate && next build"
+    "ci": "DATABASE_URL=${DIRECT_URL:-$DATABASE_URL} payload migrate && next build --webpack"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -41,5 +41,17 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "type": "module"
+  "type": "module",
+  "description": "Sitio corporativo de **ana banana Experiences** (Grupo anabanana, S.A.): presencia B2B de experiencias corporativas que transforman organizaciones *desde lo humano*, en tres pilares: **Desarrollo Profesional**, **Bienestar Corporativo** y **Experiencias de Integración**.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-innovationwizard:innovationwizard/anabananagt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

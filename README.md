@@ -187,6 +187,7 @@ La guía para editores es [docs/GUIA-EDITORES.md](docs/GUIA-EDITORES.md).
 - El **formulario de contacto** (pasos, campos, validación) vive en código (`src/lib/validations/intake.ts` + `src/components/contact/`), no en el CMS — decisión deliberada: moverlo invitaría a estados rotos.
 - **Correo corporativo obligatorio** en el formulario: dominios gratuitos (gmail, hotmail…) se rechazan por diseño.
 - Los archivos de `src/app/(payload)/` los genera Payload — no editarlos a mano.
+- **Los builds de producción usan webpack, no Turbopack** (`next build --webpack` en los scripts `build` y `ci`): con Turbopack, el build de producción genera un panel `/admin` en blanco — sin errores en consola, simplemente vacío (bug de Payload+Turbopack verificado el 2026-08-13 con payload 3.87.1 / Next 16.2.7; dev con Turbopack funciona bien). Al actualizar Payload, se puede probar quitar `--webpack` y verificar `/admin` en un build local (`npm run build && npm run start`) **abriéndolo en un navegador** — el HTML no basta: el panel siempre se renderiza en el cliente.
 - En dev, si el HMR del panel `/admin` se comporta raro con Turbopack: `next dev --webpack` como salida.
 
 ## Diagnóstico rápido
@@ -197,5 +198,7 @@ La guía para editores es [docs/GUIA-EDITORES.md](docs/GUIA-EDITORES.md).
 | Build falla: `Contenido requerido ausente en el CMS: …` | La base está vacía o falta un documento: `npm run seed`, o publica ese documento en `/admin` |
 | `/next/preview` responde 401 «Secreto de vista previa inválido» | El `PREVIEW_SECRET` del entorno no coincide con el del panel que generó el enlace |
 | Publiqué y el sitio no cambió | Espera una petición más (*stale-while-revalidate*) — o acabas de sembrar (ver arriba) |
+| El build de producción se congela en `payload migrate` con «It looks like you've run Payload in dev mode…» | Algo inicializó Payload contra la base de producción sin `NODE_ENV=production` (p. ej. el seed) y dejó un marcador de modo dev. Fix: Supabase → SQL Editor → `DELETE FROM payload_migrations WHERE batch = -1;` y redeployar. No hay pérdida de datos: la migración ya aplicada se omite. |
+| `/admin` carga una página en blanco en producción (sin errores en consola; el sitio funciona) | El build se hizo con Turbopack. Los scripts `build`/`ci` deben llevar `next build --webpack` (ver «Detalles que conviene saber»). |
 | Las imágenes no cargan en producción | Revisa `SUPABASE_PUBLIC_HOSTNAME` y que el bucket sea **Public**; el patrón permitido vive en `next.config.ts` |
 | El formulario «funciona» pero no llegan correos | Comportamiento esperado sin `RESEND_API_KEY`: los leads están en `/admin` → Solicitudes, marcados «correo no enviado» |

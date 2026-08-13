@@ -12,7 +12,7 @@ _Topología: GitHub → Vercel (hosting) → Supabase Pro (Postgres + Storage). 
 
 1. **Storage**: crear bucket `media`, marcado **Public**.
 2. **Claves S3**: Project Settings → Storage → **S3 Connection** → crear access key. Anotar endpoint (`https://<ref>.storage.supabase.co/storage/v1/s3`), región, key id y secret. Son de servidor: solo van a Vercel y a los secretos de GitHub.
-3. **Conexiones**: Project Settings → Database. Anotar **pooler de transacciones (6543)** para runtime y **session/directa (5432)** para migraciones y respaldos.
+3. **Conexiones**: botón **Connect** del proyecto → Direct → Connection string. Anotar el **Transaction pooler (6543) con «Use IPv4 connection» activado** para runtime y el **Session pooler (5432)** para migraciones y respaldos. Ambos strings correctos comparten las señas: usuario `postgres.<ref>` y host `aws-0-<region>.pooler.supabase.com`. **No usar nada con host `db.<ref>.supabase.co`** — ni la «Direct connection» ni el pooler *dedicado*: ambos son solo-IPv6 y fallan desde Vercel y GitHub Actions con `ENETUNREACH` (no hace falta el add-on IPv4; el pooler compartido es la alternativa oficial).
 4. **Supabase Cron** (para publicación programada): Dashboard → Integrations → Cron → nuevo job cada 5 min que haga un HTTP GET a `https://anabanana.gt/api/payload-jobs/run` con header `Authorization: Bearer <CRON_SECRET>`. (Puede posponerse: sin esto, todo funciona salvo programar publicaciones a futuro.)
 
 ## 2. Vercel — variables de entorno (Production)
@@ -20,7 +20,7 @@ _Topología: GitHub → Vercel (hosting) → Supabase Pro (Postgres + Storage). 
 | Variable | Valor |
 |---|---|
 | `DATABASE_URL` | pooler de transacciones (6543) |
-| `DIRECT_URL` | conexión session/directa (5432) — solo la usa el paso de migraciones |
+| `DIRECT_URL` | Session pooler (5432) — solo la usa el paso de migraciones |
 | `PAYLOAD_SECRET` | `openssl rand -hex 32` (nuevo, distinto al de dev) |
 | `PREVIEW_SECRET` | `openssl rand -hex 32` (nuevo) |
 | `CRON_SECRET` | `openssl rand -hex 32` (nuevo) |
@@ -35,18 +35,18 @@ El build command viene de `vercel.json` → `npm run ci` (= migraciones + build)
 
 ## 3. Primer despliegue (orden exacto)
 
-1. Deploy en Vercel → el build aplica `src/migrations/` a la base vacía (crea todo el schema).
-2. **Sembrar producción** desde tu máquina, con env de producción SOLO en esa terminal:
-   `DATABASE_URL=<pooler> S3_BUCKET=… S3_REGION=… S3_ENDPOINT=… S3_ACCESS_KEY_ID=… S3_SECRET_ACCESS_KEY=… SUPABASE_PUBLIC_HOSTNAME=… PAYLOAD_SECRET=<el de prod> npx tsx scripts/seed.ts`
-   (`tsx` no lee `.env`, así que solo aplican las variables de esa línea; los medios suben al bucket con su texto alternativo).
-3. Redeploy (o publicar cualquier documento en `/admin`) para regenerar cachés con el contenido sembrado.
+1. Primer deploy en Vercel → el paso de migraciones aplica `src/migrations/` a la base vacía (crea todo el schema). **Es esperado que este primer build falle después de migrar**, con `Contenido requerido ausente en el CMS`: la base tiene schema pero aún no tiene contenido, y el build se niega a publicar páginas vacías. Las migraciones ya quedaron aplicadas (verifícalo en el log: `Migrated: …_initial`).
+2. **Sembrar producción** desde tu máquina, con env de producción SOLO en esa terminal — **siempre con `NODE_ENV=production` al frente**:
+   `NODE_ENV=production DATABASE_URL=<pooler-transacciones> S3_BUCKET=… S3_REGION=… S3_ENDPOINT=… S3_ACCESS_KEY_ID=… S3_SECRET_ACCESS_KEY=… SUPABASE_PUBLIC_HOSTNAME=… PAYLOAD_SECRET=<el de prod> npx tsx scripts/seed.ts`
+   Sin `NODE_ENV=production`, Payload arranca en modo dev y hace *push* del esquema contra producción, dejando un marcador (`batch = -1` en `payload_migrations`) que hace que el siguiente build se congele preguntando por consola. Si ya ocurrió: en Supabase → SQL Editor, ejecutar `DELETE FROM payload_migrations WHERE batch = -1;` y redeployar. (`tsx` no lee `.env`, así que solo aplican las variables de esa línea; los medios suben al bucket con su texto alternativo.)
+3. Redeploy → con contenido en la base, el build ahora termina en verde y las páginas se generan con el contenido sembrado.
 4. Crear usuarios en `/admin`: Jorge como **Administrador**; la editora del cliente como **Editor** con su **nombre y correo reales** — el marcador «Editor Name / editor@example.com» de dev **no debe existir en producción**.
 5. **Revisión visual completa** del sitio en producción antes de anunciar (lo revisado es lo que se publica).
 
 ## 4. Respaldos
 
 - Supabase Pro: respaldo diario de la **base** (7 días). Storage **no tiene versionado** — borrados son permanentes.
-- Segunda copia: workflow `Respaldo de producción` (`.github/workflows/backup.yml`), domingos + manual. Requiere secretos de GitHub: `SUPABASE_DB_URL` (5432), `S3_ENDPOINT`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`. Artefactos 90 días.
+- Segunda copia: workflow `Respaldo de producción` (`.github/workflows/backup.yml`), domingos + manual. Requiere secretos de GitHub: `SUPABASE_DB_URL` (el **Session pooler**, 5432 — el mismo string que `DIRECT_URL`), `S3_ENDPOINT`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`. Artefactos 90 días.
 - **Restaurar base**: `docker run --rm -v "$PWD:/b" postgres:17 pg_restore -d "<SUPABASE_DB_URL>" --clean --no-owner /b/db.dump`
 - **Restaurar medios**: descomprimir `media.tar.gz` y `aws s3 sync ./media-backup "s3://media" --endpoint-url <S3_ENDPOINT>`.
 
