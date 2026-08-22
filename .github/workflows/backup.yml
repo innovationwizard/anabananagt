@@ -6,9 +6,12 @@
 # segunda copia, guardada como artefacto del repositorio (90 días).
 #
 # Secretos requeridos (Settings → Secrets and variables → Actions):
-#   SUPABASE_DB_URL   — conexión directa/session (5432), NO el pooler 6543
+#   SUPABASE_DB_URL   — conexión Session pooler (5432, host …pooler.supabase.com),
+#                       con la contraseña real percent-encoded. NO el pooler 6543
+#                       ni la conexión directa db.<ref> (solo-IPv6).
 #   S3_ENDPOINT       — https://<ref>.storage.supabase.co/storage/v1/s3
-#   S3_BUCKET         — nombre del bucket de medios
+#   S3_BUCKET         — nombre del bucket de medios (media)
+#   S3_REGION         — región del proyecto Supabase (ej. us-east-2)
 #   S3_ACCESS_KEY_ID / S3_SECRET_ACCESS_KEY — claves S3 de Supabase Storage
 #
 # También ejecutable a mano: Actions → Respaldo de producción → Run workflow.
@@ -28,6 +31,25 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
+      - name: Verificar secretos
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+          S3_ENDPOINT: ${{ secrets.S3_ENDPOINT }}
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          S3_REGION: ${{ secrets.S3_REGION }}
+          S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+          S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+        run: |
+          faltan=""
+          for v in SUPABASE_DB_URL S3_ENDPOINT S3_BUCKET S3_REGION S3_ACCESS_KEY_ID S3_SECRET_ACCESS_KEY; do
+            [ -z "$(printenv "$v")" ] && faltan="$faltan $v"
+          done
+          if [ -n "$faltan" ]; then
+            echo "::error::Faltan secretos de GitHub:$faltan — configúralos en Settings → Secrets and variables → Actions (ver docs/DESPLIEGUE.md §4)."
+            exit 1
+          fi
+          echo "Secretos completos."
+
       - name: pg_dump (postgres 17)
         run: |
           docker run --rm \
@@ -41,7 +63,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
+          AWS_DEFAULT_REGION: ${{ secrets.S3_REGION }}
         run: |
           aws s3 sync "s3://${{ secrets.S3_BUCKET }}" ./media-backup \
             --endpoint-url "${{ secrets.S3_ENDPOINT }}"

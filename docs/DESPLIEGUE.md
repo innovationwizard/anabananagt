@@ -46,7 +46,7 @@ El build command viene de `vercel.json` → `npm run ci` (= migraciones + build)
 ## 4. Respaldos
 
 - Supabase Pro: respaldo diario de la **base** (7 días). Storage **no tiene versionado** — borrados son permanentes.
-- Segunda copia: workflow `Respaldo de producción` (`.github/workflows/backup.yml`), domingos + manual. Requiere secretos de GitHub: `SUPABASE_DB_URL` (el **Session pooler**, 5432 — el mismo string que `DIRECT_URL`), `S3_ENDPOINT`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`. Artefactos 90 días.
+- Segunda copia: workflow `Respaldo de producción` (`.github/workflows/backup.yml`), domingos + manual. Requiere secretos de GitHub: `SUPABASE_DB_URL` (el **Session pooler**, 5432 — el mismo string que `DIRECT_URL`), `S3_ENDPOINT`, `S3_BUCKET`, `S3_REGION` (región del proyecto, ej. `us-east-2`), `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`. Artefactos 90 días. Sin los secretos, el workflow falla de inmediato nombrando cuáles faltan (el cron corre igual aunque no estén configurados).
 - **Restaurar base**: `docker run --rm -v "$PWD:/b" postgres:17 pg_restore -d "<SUPABASE_DB_URL>" --clean --no-owner /b/db.dump`
 - **Restaurar medios**: descomprimir `media.tar.gz` y `aws s3 sync ./media-backup "s3://media" --endpoint-url <S3_ENDPOINT>`.
 
