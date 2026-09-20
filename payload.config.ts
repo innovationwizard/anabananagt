@@ -81,7 +81,9 @@ export default buildConfig({
       titleSuffix: " — ana banana · Estudio de contenido",
       description:
         "Panel de administración de contenido del sitio anabanana.gt — ana banana Experiences.",
-      icons: [{ url: "/icon.png" }],
+      // Copia estática del ícono del sitio: Next sirve src/app/(site)/icon.png
+      // con hash en la URL, así que /icon.png devolvía 404 en el panel.
+      icons: [{ url: "/admin-icon.png", type: "image/png", sizes: "512x512" }],
       openGraph: {
         title: "ana banana · Estudio de contenido",
         description:
