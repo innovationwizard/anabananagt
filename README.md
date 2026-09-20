@@ -127,7 +127,7 @@ Todo está documentado con comentarios en [.env.example](.env.example). Resumen:
 | `PAYLOAD_SECRET`, `PREVIEW_SECRET`, `CRON_SECRET` | generados localmente | generados aparte para producción (nunca se comparten entre entornos) |
 | `NEXT_PUBLIC_SERVER_URL`, `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` | `https://anabanana.gt` |
 | `S3_BUCKET/REGION/ENDPOINT/ACCESS_KEY_ID/SECRET_ACCESS_KEY`, `SUPABASE_PUBLIC_HOSTNAME` | — (disco local) | Supabase Storage, S3 Connection |
-| `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_TO_EMAIL` | opcional | correo del formulario (sin la clave, los leads igual se guardan) |
+| `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, `RESEND_TO_EMAIL` | opcional (correos a consola) | requerida — correo del formulario y del panel (restablecer contraseña) |
 
 Si falta una variable requerida, el arranque **falla con un mensaje claro** que la nombra — no hay valores de relleno silenciosos.
 
@@ -175,7 +175,6 @@ La guía para editores es [docs/GUIA-EDITORES.md](docs/GUIA-EDITORES.md).
 - Video de la portada del inicio (especificaciones visibles en el propio marcador).
 - Fotos de 2 pilares (Bienestar, Integración) y 2 fotos de «Sembrando futuro».
 - Testimonios reales (los 3 actuales son marcadores de posición explícitos).
-- Clave de Resend (`RESEND_API_KEY`) para activar los correos del formulario.
 
 ---
 
@@ -203,4 +202,4 @@ La guía para editores es [docs/GUIA-EDITORES.md](docs/GUIA-EDITORES.md).
 | `/admin` carga una página en blanco (sin errores en consola; el sitio funciona) | Al `importMap.js` le falta un componente que un plugin activo necesita (típico: el del almacenamiento S3 en producción). Fix: `npm run generate:importmap` con las mismas variables de entorno que el build y recompilar — `npm run ci` ya lo hace solo. Ver «Detalles que conviene saber». |
 | Algunas vistas del panel en blanco (o error 500 «Cannot use 'in' operator…» en los logs) SOLO en un navegador que ya había usado el panel antes de un redeploy | JavaScript del panel cacheado de un deploy anterior chocando con el servidor nuevo. Prueba en ventana de incógnito: si ahí funciona, en el navegador afectado limpia los datos del sitio (DevTools → Application → Clear site data) y recarga. |
 | Las imágenes no cargan en producción | Revisa `SUPABASE_PUBLIC_HOSTNAME` y que el bucket sea **Public**; el patrón permitido vive en `next.config.ts` |
-| El formulario «funciona» pero no llegan correos | Comportamiento esperado sin `RESEND_API_KEY`: los leads están en `/admin` → Solicitudes, marcados «correo no enviado» |
+| El formulario «funciona» pero no llegan correos | Los leads están en `/admin` → Solicitudes, marcados «correo no enviado»; revisar `RESEND_API_KEY` y el dominio verificado en Resend |

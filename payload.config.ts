@@ -4,6 +4,7 @@ import { buildConfig, type Plugin } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { s3Storage } from "@payloadcms/storage-s3";
+import { resendAdapter } from "@payloadcms/email-resend";
 import { en } from "@payloadcms/translations/languages/en";
 import { es } from "@payloadcms/translations/languages/es";
 import sharp from "sharp";
@@ -69,6 +70,20 @@ function buildPlugins(): Plugin[] {
       },
     }),
   ];
+}
+
+// Correo del panel (restablecer contraseña, verificación de cuentas) por
+// Resend, con la misma clave que usa el formulario de contacto. Requerido en
+// producción; en dev local sin clave, Payload escribe los correos en consola.
+function buildEmail() {
+  if (process.env.NODE_ENV !== "production" && !process.env.RESEND_API_KEY) {
+    return undefined;
+  }
+  return resendAdapter({
+    apiKey: requireEnv("RESEND_API_KEY"),
+    defaultFromAddress: process.env.RESEND_FROM_EMAIL ?? "consultas@anabanana.gt",
+    defaultFromName: "ana banana · Estudio de contenido",
+  });
 }
 
 export default buildConfig({
@@ -155,5 +170,6 @@ export default buildConfig({
     migrationDir: path.resolve(dirname, "src/migrations"),
   }),
   sharp,
+  email: buildEmail(),
   plugins: buildPlugins(),
 });

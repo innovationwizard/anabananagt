@@ -28,7 +28,7 @@ _Topología: GitHub → Vercel (hosting) → Supabase Pro (Postgres + Storage). 
 | `SUPABASE_PUBLIC_HOSTNAME` | `<ref>.supabase.co` (imágenes en next/image) |
 | `NEXT_PUBLIC_SERVER_URL` | `https://anabanana.gt` |
 | `NEXT_PUBLIC_SITE_URL` | `https://anabanana.gt` |
-| `RESEND_API_KEY` | **pendiente (Jorge)** — sin ella las solicitudes se guardan igualmente y quedan marcadas «correo no enviado» |
+| `RESEND_API_KEY` | **requerida** (configurada 2026-08-14) — correo del formulario y del panel (restablecer contraseña, verificación de cuentas); sin ella el arranque falla en producción |
 | `RESEND_FROM_EMAIL` / `RESEND_TO_EMAIL` | `consultas@anabanana.gt` / `equipo@anabanana.gt` |
 
 El build command viene de `vercel.json` → `npm run ci` (= migraciones + build). Guarda los secretos en el vault compartido, nunca en el repo.
@@ -57,5 +57,6 @@ El build command viene de `vercel.json` → `npm run ci` (= migraciones + build)
 - [ ] Editar y publicar el titular del inicio → el sitio público cambia en segundos.
 - [ ] Vista previa en vivo funciona (borrador visible solo con el aviso «Viendo borrador»).
 - [ ] Subir una imagen en Biblioteca de medios → aparece en el bucket de Supabase y sirve desde `…/storage/v1/object/public/media/…`.
-- [ ] Enviar el formulario de contacto → aparece en Solicitudes (con `RESEND_API_KEY` pendiente: marcada «correo no enviado», y el lead ve éxito).
+- [ ] Enviar el formulario de contacto → aparece en Solicitudes con «correo enviado» y llegan los dos correos.
+- [ ] En `/admin/login` → «¿Olvidaste tu contraseña?» → llega el correo de restablecimiento.
 - [ ] Ejecutar manualmente el workflow de respaldo → artefacto con `db.dump` y `media.tar.gz`.
