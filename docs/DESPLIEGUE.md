@@ -1,6 +1,6 @@
 # Despliegue a producción — runbook
 
-_Topología: GitHub → Vercel (hosting) → Supabase Pro (Postgres + Storage). Dev nunca toca producción: local usa Postgres local + disco local. Última actualización: 2026-08-07._
+_Topología: GitHub → Vercel (hosting) → Supabase Pro (Postgres + Storage). Dev nunca toca producción: local usa Postgres local + disco local. Última actualización: 2026-10-14._
 
 ## 0. Regla de oro de la base de datos
 
@@ -11,8 +11,8 @@ _Topología: GitHub → Vercel (hosting) → Supabase Pro (Postgres + Storage). 
 ## 1. Supabase (una vez, en el proyecto Pro)
 
 1. **Storage**: crear bucket `media`, marcado **Public**.
-2. **Claves S3**: Project Settings → Storage → **S3 Connection** → crear access key. Anotar endpoint (`https://<ref>.storage.supabase.co/storage/v1/s3`), región, key id y secret. Son de servidor: solo van a Vercel y a los secretos de GitHub.
-3. **Conexiones**: botón **Connect** del proyecto → Direct → Connection string. Anotar el **Transaction pooler (6543) con «Use IPv4 connection» activado** para runtime y el **Session pooler (5432)** para migraciones y respaldos. Ambos strings correctos comparten las señas: usuario `postgres.<ref>` y host `aws-0-<region>.pooler.supabase.com`. **No usar nada con host `db.<ref>.supabase.co`** — ni la «Direct connection» ni el pooler *dedicado*: ambos son solo-IPv6 y fallan desde Vercel y GitHub Actions con `ENETUNREACH` (no hace falta el add-on IPv4; el pooler compartido es la alternativa oficial).
+2. **Claves S3**: Project Settings → Storage → **S3 Connection** → crear access key. Anotar endpoint (`https://<ref>.storage.supabase.co/storage/v1/s3`), región, key id y secret. Son de servidor: solo van a Vercel.
+3. **Conexiones**: botón **Connect** del proyecto → Direct → Connection string. Anotar el **Transaction pooler (6543) con «Use IPv4 connection» activado** para runtime y el **Session pooler (5432)** para migraciones. Ambos strings correctos comparten las señas: usuario `postgres.<ref>` y host `aws-0-<region>.pooler.supabase.com`. **No usar nada con host `db.<ref>.supabase.co`** — ni la «Direct connection» ni el pooler *dedicado*: ambos son solo-IPv6 y fallan desde Vercel con `ENETUNREACH` (no hace falta el add-on IPv4; el pooler compartido es la alternativa oficial).
 4. **Supabase Cron** (para publicación programada): Dashboard → Integrations → Cron → nuevo job cada 5 min que haga un HTTP GET a `https://anabanana.gt/api/payload-jobs/run` con header `Authorization: Bearer <CRON_SECRET>`. (Puede posponerse: sin esto, todo funciona salvo programar publicaciones a futuro.)
 
 ## 2. Vercel — variables de entorno (Production)
@@ -45,10 +45,8 @@ El build command viene de `vercel.json` → `npm run ci` (= migraciones + build)
 
 ## 4. Respaldos
 
-- Supabase Pro: respaldo diario de la **base** (7 días). Storage **no tiene versionado** — borrados son permanentes.
-- Segunda copia: workflow `Respaldo de producción` (`.github/workflows/backup.yml`), domingos + manual. Requiere secretos de GitHub: `SUPABASE_DB_URL` (el **Session pooler**, 5432 — el mismo string que `DIRECT_URL`), `S3_ENDPOINT`, `S3_BUCKET`, `S3_REGION` (región del proyecto, ej. `us-east-2`), `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`. Artefactos 90 días. Sin los secretos, el workflow falla de inmediato nombrando cuáles faltan (el cron corre igual aunque no estén configurados).
-- **Restaurar base**: `docker run --rm -v "$PWD:/b" postgres:17 pg_restore -d "<SUPABASE_DB_URL>" --clean --no-owner /b/db.dump`
-- **Restaurar medios**: descomprimir `media.tar.gz` y `aws s3 sync ./media-backup "s3://media" --endpoint-url <S3_ENDPOINT>`.
+- Supabase Pro: respaldo diario de la **base** (7 días), en Database → Backups. Restaurar se hace desde ese panel; el proyecto queda inaccesible mientras dura.
+- El bucket de medios no entra en ese respaldo y **no tiene versionado**: borrar un archivo en la biblioteca es permanente. La fila en la base (nombre, texto alternativo) sí vuelve con el respaldo; el archivo no.
 
 ## 5. Checklist de verificación post-despliegue
 
@@ -59,4 +57,3 @@ El build command viene de `vercel.json` → `npm run ci` (= migraciones + build)
 - [ ] Subir una imagen en Biblioteca de medios → aparece en el bucket de Supabase y sirve desde `…/storage/v1/object/public/media/…`.
 - [ ] Enviar el formulario de contacto → aparece en Solicitudes con «correo enviado» y llegan los dos correos.
 - [ ] En `/admin/login` → «¿Olvidaste tu contraseña?» → llega el correo de restablecimiento.
-- [ ] Ejecutar manualmente el workflow de respaldo → artefacto con `db.dump` y `media.tar.gz`.

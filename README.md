@@ -16,7 +16,7 @@ No hay servicios de CMS externos: el contenido vive en una base Postgres y los a
 | Documento | Qué contiene | Para quién |
 |---|---|---|
 | **Este README** | Qué es el proyecto, cómo levantarlo desde cero y cómo llevarlo a producción | Cualquier desarrollador/proveedor que reciba el repo |
-| [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md) | Runbook de producción: Supabase, Vercel, variables, primer despliegue, respaldos, restauración, checklist | Quien opere la infraestructura |
+| [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md) | Runbook de producción: Supabase, Vercel, variables, primer despliegue, respaldos, checklist | Quien opere la infraestructura |
 | [docs/GUIA-EDITORES.md](docs/GUIA-EDITORES.md) | Guía de una página para quien edita contenido en `/admin` | El equipo del cliente |
 | [docs/CMS-IMPLEMENTATION-PLAN.md](docs/CMS-IMPLEMENTATION-PLAN.md) | Plan con el que se construyó el CMS (decisiones y fases) | Contexto técnico |
 | [docs/CMS-RESEARCH.md](docs/CMS-RESEARCH.md) | Investigación que fundamenta el diseño del CMS | Contexto técnico |
@@ -140,7 +140,7 @@ El runbook completo (Supabase + Vercel, paso a paso, con checklist) es **[docs/D
 - **Regla de oro**: dev sincroniza el esquema por *push* contra la base **local**; producción usa **solo migraciones** (`src/migrations/`, aplicadas por `npm run ci` durante el build). Nunca se mezclan: no ejecutes `payload migrate` contra la base local ni apuntes `npm run dev` a producción.
 - Cambiaste colecciones/globals → `npx payload migrate:create <nombre>` → commit del cambio + la migración juntos.
 - Primer despliegue: build (aplica migraciones) → `seed` contra producción → refrescar cachés → crear usuarios reales → revisión visual completa.
-- **Respaldos**: además del respaldo diario de Supabase (solo base de datos), el workflow [`.github/workflows/backup.yml`](.github/workflows/backup.yml) guarda semanalmente base **y** medios como artefacto (el Storage no tiene versionado: un borrado sin respaldo es permanente).
+- **Respaldos**: el respaldo diario de Supabase Pro (7 días) cubre la base de datos. El bucket de medios no entra en ese respaldo y no tiene versionado: un archivo borrado en la biblioteca no se recupera.
 - Publicación programada (opcional): un cron externo debe llamar `GET /api/payload-jobs/run` con `Authorization: Bearer $CRON_SECRET` cada ~5 min (Supabase Cron, GitHub Actions o el cron del proveedor — **no** se usa Vercel Cron en este proyecto).
 
 ## Cambiar de proveedor de infraestructura
@@ -151,7 +151,7 @@ El proyecto no depende de Vercel ni de Supabase en el código — solo de tres c
 2. **Postgres** (cualquier Postgres gestionado o propio). Solo cambian `DATABASE_URL`/`DIRECT_URL`.
 3. **Almacenamiento compatible con S3** (Supabase Storage, AWS S3, Cloudflare R2, MinIO…). Solo cambian las variables `S3_*` y `SUPABASE_PUBLIC_HOSTNAME` → el host público desde el que sirven los archivos (y su patrón en `next.config.ts` si la ruta pública difiere del formato de Supabase).
 
-**Para migrar los datos**: los artefactos del workflow de respaldo son el vehículo — `db.dump` (restaurar con `pg_restore`) + `media.tar.gz` (subir al nuevo bucket con `aws s3 sync --endpoint-url …`). Procedimientos exactos en [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md) §4.
+**Para migrar los datos**: volcar Postgres con `pg_dump` del Session pooler (el mismo string que `DIRECT_URL`) y copiar el bucket con `aws s3 sync` contra el endpoint S3. Las cadenas de conexión están en [docs/DESPLIEGUE.md](docs/DESPLIEGUE.md) §1.
 
 **Al traspasar el proyecto, rotar SIEMPRE**: `PAYLOAD_SECRET`, `PREVIEW_SECRET`, `CRON_SECRET`, las claves S3 y la clave de Resend. Los secretos anteriores quedan inválidos para quien los haya tenido.
 
